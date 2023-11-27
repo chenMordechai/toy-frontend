@@ -1,0 +1,22 @@
+.toy-edit form {
+    display: grid;
+    grid-template-columns: 80px 170px;
+    gap: 10px;
+    justify-items: start;
+}
+
+.toy-edit form input {
+    margin: 0;
+}
+
+.toy-edit form ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toy-edit form li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
