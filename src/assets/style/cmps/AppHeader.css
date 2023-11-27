@@ -2,10 +2,14 @@
   background-color: var(--clr1);
   color: var(--clr1bg);
   padding: 1em;
+  display: flex;
+  gap: 10px;
+  position: sticky;
+  top: 0;
 }
 
-@media(max-width: 720px) {
+/* @media (max-width: 720px) {
   .app-header {
     color: var(--clr2bg);
   }
-}
+} */

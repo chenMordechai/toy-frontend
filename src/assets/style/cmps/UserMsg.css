@@ -1,6 +1,6 @@
 .user-msg {
     background-color: lightgray;
-    padding: .2em .5em;
+    padding: 0.2em 0.5em;
     position: fixed;
     bottom: 0;
     right: 1em;
@@ -17,7 +17,7 @@
 }
 
 .user-msg button {
-    font-size: .5em;
+    font-size: 0.5em;
     float: right;
-    margin: .5em;
+    margin: 0.5em;
 }

@@ -56,10 +56,12 @@ export function ToyEdit() {
         console.log('toyToEdit:', toyToEdit)
         saveToy({ ...toyToEdit })
             .then(() => {
+                showSuccessMsg('Update Toy: ' + toyId)
                 navigate('/toy')
             })
             .catch(err => {
                 console.log('err:', err)
+                showErrorMsg('Cannot Update Toy')
             })
     }
 
