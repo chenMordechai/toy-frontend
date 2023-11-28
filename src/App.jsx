@@ -3,6 +3,8 @@ import { Provider } from 'react-redux'
 import './style/main.scss'
 
 import { HomePage } from './pages/HomePage'
+import { About } from './pages/About'
+import { Blog } from './pages/Blog'
 import { store } from './store/store'
 import { ToyIndex } from './pages/ToyIndex'
 import { ToyDetails } from './pages/ToyDetails'
@@ -22,6 +24,8 @@ export function App() {
             <Routes>
               <Route element={<HomePage />} path="/" />
               <Route element={<ToyIndex />} path="/toy" />
+              <Route element={<About />} path="/about" />
+              <Route element={<Blog />} path="/blog" />
               <Route element={<ToyDetails />} path="/toy/:toyId" />
               <Route element={<ToyEdit />} path="/toy/edit/" />
               <Route element={<ToyEdit />} path="/toy/edit/:toyId" />

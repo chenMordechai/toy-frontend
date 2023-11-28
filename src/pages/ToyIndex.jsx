@@ -8,7 +8,7 @@ import { ToyList } from '../cpms/ToyList.jsx'
 import { ToyFilter } from '../cpms/ToyFilter.jsx'
 import { ToySort } from '../cpms/ToySort.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { CategoryPreview } from '../cpms/CategoryPreview.jsx'
+import { CategoryList } from '../cpms/CategoryList.jsx'
 
 export function ToyIndex() {
 
@@ -19,10 +19,9 @@ export function ToyIndex() {
     // const [filterByToEdit, setFilterByToEdit] = useState(toyService.getDefaultFilter())
     // console.log('filterByToEdit:', filterByToEdit)
     const labels = toyService.getLabels()
-    const categories = toyService.getCategories()
+  
     // const [sortByToEdit, setSortByToEdit] = useState(toyService.getDefaultSort())
 
-    const [isFullCatgory, setisFullCatgory] = useState(false)
 
     useEffect(() => {
         // console.log('sortByToEdit:', sortByToEdit)
@@ -59,9 +58,7 @@ export function ToyIndex() {
         setLabels({ name, checked })
     }
 
-    function toggleCategory(){
-        setisFullCatgory(prev => !prev)
-    }
+  
     // function onSetLabels(name, checked) {
 
     //     // if (checked) {
@@ -75,22 +72,11 @@ export function ToyIndex() {
         <section className="toy-index">
 
             <section className="category-container">
-                <div>
-                    Category
-                </div>
-                {isFullCatgory && <ul className="category-full">
-                    {categories.map((category, idx) =>
-                        <CategoryPreview key={idx} category={category}  />)}
-                </ul> }
-                  {!isFullCatgory &&  <ul className="category-part">
-                    {categories.filter((category,idx)=> idx < 3).map((category, idx) =>
-                        <CategoryPreview key={idx} category={category}  />)}
-                </ul> }
-                <button onClick={toggleCategory}>see {isFullCatgory?'less':'all'}</button>
-                {/* <button><Link to="/toy/edit">Add New Toy</Link></button> */}
+              <CategoryList/>
             </section>
 
             <section className="filter-container">
+                {/* <button><Link to="/toy/edit">Add New Toy</Link></button> */}
                 <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} />
                 <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
             </section>

@@ -16,7 +16,8 @@ export const toyService = {
     getDefaultFilter,
     getLabels,
     getDefaultSort,
-    getCategories
+    getCategories,
+    getCategoriesIcons
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -114,6 +115,9 @@ function getLabels() {
 
 function getCategories() {
     return ['All', 'In Stock', ...getLabels()]
+}
+function getCategoriesIcons() {
+    return ['faPersonBiking','faCubesStacked', 'faPuzzlePiece' , 'faBorderAll']
 }
 
 // TEST DATA

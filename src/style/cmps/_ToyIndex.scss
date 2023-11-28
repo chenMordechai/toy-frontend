@@ -8,15 +8,24 @@
 
     .category-container {
         grid-area: label;
-        width: 140px;
+        // width: 140px;
         background-color: $clr2;
         margin-top: -70px;
         z-index: 1;
-        height: 100vh;
+        min-height: 100vh;
 
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        // justify-content: center;
+        padding: $pad2;
+        padding-top: 150px;
+
+        position: sticky;
+        top: 0;
+
+        h3 {
+            color: $clr6;
+        }
     }
 
     .filter-container {

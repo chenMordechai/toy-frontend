@@ -9,6 +9,11 @@
     background-color: $clr1;
     padding: $pad2;
 
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    height: 100vh;
+
     div {
         background-color: darken($clr1, 2%);
         width: 50px;
@@ -16,6 +21,7 @@
         padding: $pad1;
         border-radius: 50%;
         font-size: 1.5em;
+        cursor: pointer;
 
         display: flex;
         align-items: center;

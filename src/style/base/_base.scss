@@ -9,7 +9,7 @@
 
 html {
   font-family: Bahnschrift, sans-serif;
-  color: $clr3;
+  color: $clr5;
   line-height: 1.8;
   line-height: lh(26px);
 
@@ -98,11 +98,11 @@ p {
 .btn {
   @include btn;
 
-  &-dark {
+  &.dark {
     @include btn($type: dark);
   }
 
-  &-light {
+  &.light {
     @include btn($type: light);
   }
 }
