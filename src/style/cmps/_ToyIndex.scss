@@ -1,0 +1,33 @@
+.toy-index {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "label filter"
+        "label list";
+
+    .category-container {
+        grid-area: label;
+        width: 140px;
+        background-color: $clr2;
+        margin-top: -70px;
+        z-index: 1;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .filter-container {
+        grid-area: filter;
+        height: 140px;
+        width: 100%;
+        background-color: $clr4;
+    }
+
+    .list-container {
+        grid-area: list;
+        padding: $pad1;
+    }
+}

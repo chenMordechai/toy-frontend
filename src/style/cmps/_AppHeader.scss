@@ -1,7 +1,12 @@
 .app-header {
-  background-color: var(--clr1);
+  grid-area: header;
+  height: 70px;
+  width: 100%;
+
+  background-color: $clr3;
+
   color: var(--clr1bg);
-  padding: 1em;
+  // padding: 1em;
   display: flex;
   gap: 10px;
   position: sticky;

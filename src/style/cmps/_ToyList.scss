@@ -1,0 +1,17 @@
+.toy-list {
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        li {
+            display: flex;
+            flex-direction: column;
+            background-color: lightcoral;
+            max-width: 200px;
+            height: 350px;
+            background-color: $clr1;
+            border-radius: 10px;
+        }
+    }
+}

@@ -1,16 +1,16 @@
 import { toyService } from "../services/toy.service"
 
-export function ToySort({sortBy, onSetSortBy}) {
+export function ToySort({ sortBy, onSetSortBy }) {
 
-    function handleChange(ev){
-        let {name ,value , type , checked} = ev.target
-        if(type === 'checkbox') value = (checked)? -1 : 1
-        onSetSortBy(name,value)
+    function handleChange(ev) {
+        let { name, value, type, checked } = ev.target
+        if (type === 'checkbox') value = (checked) ? -1 : 1
+        onSetSortBy(name, value)
     }
 
     return (
         <section className="toy-sort">
-            <h2>Sort</h2>
+            {/* <h2>Sort</h2> */}
             <form >
                 <label htmlFor="type">Sort By:</label>
                 <select onChange={handleChange} name="type" id="type" value={sortBy.type}>

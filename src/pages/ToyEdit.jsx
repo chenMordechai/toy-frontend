@@ -53,7 +53,6 @@ export function ToyEdit() {
 
     function onSubmitForm(ev) {
         ev.preventDefault()
-        console.log('toyToEdit:', toyToEdit)
         saveToy({ ...toyToEdit })
             .then(() => {
                 showSuccessMsg('Update Toy: ' + toyId)

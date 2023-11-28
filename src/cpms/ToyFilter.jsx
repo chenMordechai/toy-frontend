@@ -1,30 +1,26 @@
 import { toyService } from "../services/toy.service"
 
-import {Label} from './Label.jsx'
+import { Label } from './Label.jsx'
 
-export function ToyFilter({filterBy , onSetFilterBy , labelsToShow , onSetLabels}) {
-   
-    function handleChange(ev){
-        let {name , value , type , checked} = ev.target
-        if(type === 'number') value = +value
-        else if(type === 'checkbox') value = checked
-        
-        onSetFilterBy(name,value)
+
+export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange }) {
+
+    function handleChange(ev) {
+        let { name, value, type, checked } = ev.target
+        if (type === 'number') value = +value
+        else if (type === 'checkbox') value = checked
+
+        onSetFilterBy(name, value)
     }
 
-    function handleLabelChange(ev){
-        let {name , checked} = ev.target
-        onSetLabels(name , checked)
-    }
 
-    
+
     return (
         <section className="toy-filter">
-            <h2>Filter</h2>
             <form >
                 <label htmlFor="name">Name:</label>
                 <input onChange={handleChange} value={filterBy.name} type="text" id="name" name="name" />
-
+                {/* 
                 <label htmlFor="price">Max Price:</label>
                 <input onChange={handleChange} value={filterBy.price} type="number" id="price" name="price" />
 
@@ -41,8 +37,8 @@ export function ToyFilter({filterBy , onSetFilterBy , labelsToShow , onSetLabels
                 <ul className="labels">
                     {labelsToShow.map((label, idx) =>
                         <Label key={idx} labels={filterBy.labels} label={label} idx={idx} handleLabelChange={handleLabelChange} />)}
-                </ul>
-</form>
+                </ul> */}
+            </form>
 
 
         </section>

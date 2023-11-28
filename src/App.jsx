@@ -1,6 +1,6 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import './assets/style/main.css'
+import './style/main.scss'
 
 import { HomePage } from './pages/HomePage'
 import { store } from './store/store'
@@ -8,6 +8,7 @@ import { ToyIndex } from './pages/ToyIndex'
 import { ToyDetails } from './pages/ToyDetails'
 import { ToyEdit } from './pages/ToyEdit'
 import { AppHeader } from './cpms/AppHeader'
+import { NavSide } from './cpms/NavSide'
 
 export function App() {
 
@@ -16,6 +17,7 @@ export function App() {
       <Router>
         <section className="main-layout app">
           <AppHeader />
+          <NavSide />
           <main>
             <Routes>
               <Route element={<HomePage />} path="/" />

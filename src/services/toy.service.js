@@ -15,7 +15,8 @@ export const toyService = {
     getEmptyToy,
     getDefaultFilter,
     getLabels,
-    getDefaultSort
+    getDefaultSort,
+    getCategories
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -109,6 +110,10 @@ function getDefaultSort() {
 function getLabels() {
     return ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
         'Outdoor', 'Battery Powered']
+}
+
+function getCategories() {
+    return ['All', 'In Stock', ...getLabels()]
 }
 
 // TEST DATA

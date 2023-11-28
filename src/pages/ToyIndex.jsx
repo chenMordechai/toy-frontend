@@ -8,6 +8,7 @@ import { ToyList } from '../cpms/ToyList.jsx'
 import { ToyFilter } from '../cpms/ToyFilter.jsx'
 import { ToySort } from '../cpms/ToySort.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { CategoryPreview } from '../cpms/CategoryPreview.jsx'
 
 export function ToyIndex() {
 
@@ -18,7 +19,10 @@ export function ToyIndex() {
     // const [filterByToEdit, setFilterByToEdit] = useState(toyService.getDefaultFilter())
     // console.log('filterByToEdit:', filterByToEdit)
     const labels = toyService.getLabels()
+    const categories = toyService.getCategories()
     // const [sortByToEdit, setSortByToEdit] = useState(toyService.getDefaultSort())
+
+    const [isFullCatgory, setisFullCatgory] = useState(false)
 
     useEffect(() => {
         // console.log('sortByToEdit:', sortByToEdit)
@@ -45,30 +49,56 @@ export function ToyIndex() {
         // setFilterByToEdit(prevFilter => ({...prevFilter , [name]:value}))
 
     }
-    function onSetLabels(name, checked) {
-        setLabels({ name, checked })
-        // if (checked) {
-        //     setFilterByToEdit(prevFilter => ({ ...prevFilter, labels: [...prevFilter.labels, name] }))
-        // } else {
-        //     setFilterByToEdit(prevFilter => ({ ...prevFilter, labels: prevFilter.labels.filter(l => l !== name) }))
-        // }
-    }
+
     function onSetSortBy(name, value) {
         setSortBy({ name: value })
         // setSortByToEdit(prevSort => ({...prevSort , [name] : value}))
     }
+    function handleLabelChange(ev) {
+        let { name, checked } = ev.target
+        setLabels({ name, checked })
+    }
+
+    function toggleCategory(){
+        setisFullCatgory(prev => !prev)
+    }
+    // function onSetLabels(name, checked) {
+
+    //     // if (checked) {
+    //     //     setFilterByToEdit(prevFilter => ({ ...prevFilter, labels: [...prevFilter.labels, name] }))
+    //     // } else {
+    //     //     setFilterByToEdit(prevFilter => ({ ...prevFilter, labels: prevFilter.labels.filter(l => l !== name) }))
+    //     // }
+    // }
 
     return (
         <section className="toy-index">
-            <h2>Toys</h2>
 
-            <ToyFilter onSetLabels={onSetLabels} labelsToShow={labels} filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-            <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
+            <section className="category-container">
+                <div>
+                    Category
+                </div>
+                {isFullCatgory && <ul className="category-full">
+                    {categories.map((category, idx) =>
+                        <CategoryPreview key={idx} category={category}  />)}
+                </ul> }
+                  {!isFullCatgory &&  <ul className="category-part">
+                    {categories.filter((category,idx)=> idx < 3).map((category, idx) =>
+                        <CategoryPreview key={idx} category={category}  />)}
+                </ul> }
+                <button onClick={toggleCategory}>see {isFullCatgory?'less':'all'}</button>
+                {/* <button><Link to="/toy/edit">Add New Toy</Link></button> */}
+            </section>
 
-            <button><Link to="/toy/edit">Add New Toy</Link></button>
+            <section className="filter-container">
+                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} />
+                <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
+            </section>
 
-            {isLoading && 'Loading..'}
-            {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
+            <section className="list-container">
+                {isLoading && 'Loading..'}
+                {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
+            </section>
 
 
         </section>
