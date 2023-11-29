@@ -1,0 +1,50 @@
+.toy-details {
+    background-color: $clr4;
+    color: $clr6;
+
+    display: flex;
+    justify-content: space-evenly;
+    padding: $pad2;
+
+    border-radius: 10px;
+
+    @include for-mobile-layout {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: $pad2;
+    }
+
+    .details-container {
+        display: flex;
+        flex-direction: column;
+        gap: $pad1;
+        text-align: center;
+        // align-items: center;
+        justify-content: center;
+        width: max-content;
+
+        @include for-mobile-layout {
+            width: 70%;
+        }
+    }
+
+    img {
+        width: 50%;
+        max-width: 400px;
+        @include for-mobile-layout {
+            width: 70%;
+        }
+    }
+    h4 {
+        margin: 0;
+        color: $clr6;
+        font-size: 1.6em;
+    }
+
+    ul {
+        @include for-mobile-layout {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

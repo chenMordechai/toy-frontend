@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBackward} from '@fortawesome/free-solid-svg-icons'
+
 import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
 
 
@@ -35,18 +38,24 @@ export function ToyDetails() {
     }
 
     return (
-        <section className="toy-details">
-            <h2>Toy Details</h2>
+        <section >
             {isLoading && 'Loading...'}
             {!isLoading && toy &&
-                (<section>
-                    <h2>Name:{toy.name}</h2>
-                    <h4>Id:{toy._id}</h4>
+                (<section className="toy-details">
+                    <div className="details-container">
+                    <h4>{toy.name}</h4>
+                    {/* <h4>Id: {toy._id}</h4> */}
+                    <h4>$ {toy.price}</h4>
                     <h4>{toy.inStock && 'In Stock'}</h4>
-                    <h4>Price{toy.price}</h4>
+                    {/* <h4>Labels:</h4> */}
+                    <ul>
+                    {toy.labels.map(l=><li>{l},</li>)}
+                    </ul>
+                <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
+                    </div>
+                    <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
                 </section>)}
 
-            <button><Link to="/toy">Back</Link></button>
         </section>
     )
 }
