@@ -11,17 +11,16 @@ export function ToyList({ toys, onRemoveToy }) {
         <section className="toy-list">
             <ul>
                 {toys.map(toy => <li key={toy._id}>
-                    {/* <Link className="btn small" to={`/toy/edit/${toy._id}`}>Edit</Link>
+                    <section className="controls">
                     <button className="btn small" onClick={() => {
                         onRemoveToy(toy._id)
-                    }}>Delete</button> */}
-                    <section className="controls">
-                    <FontAwesomeIcon icon={faTrash} />
-                    <FontAwesomeIcon icon={faPenToSquare} />
+                    }}><FontAwesomeIcon icon={faTrash} /></button>
+                    <Link className="btn small" to={`/toy/edit/${toy._id}`}><FontAwesomeIcon icon={faPenToSquare} /></Link>
                     </section>
+    
                     <Link to={`/toy/${toy._id}`}>
                     <ToyPreview toy={toy} />
-                 </Link>
+                     </Link>
                 </li>
                 )}
             </ul>

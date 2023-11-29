@@ -100,6 +100,11 @@ p {
   // }
 }
 
+button {
+  background-color: transparent;
+  color: inherit;
+}
+
 .btn {
   @include btn;
 

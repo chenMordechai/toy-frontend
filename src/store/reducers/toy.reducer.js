@@ -43,11 +43,13 @@ export function toyReducer(state = initialState, action = {}) {
             return { ...state, filterBy: { ...state.filterBy,...action.filterBy } }
        
             case SET_LABEL:{
-                  if (action.label.checked) {
-                    return {...state, filterBy : {...state.filterBy ,labels: [...state.filterBy.labels, action.label.name]}}
-                } else {
-            return {...state, filterBy : {...state.filterBy ,labels: state.filterBy.labels.filter(l => l !==  action.label.name)}}
-        }
+            //       if (action.label.checked) {
+                //         return {...state, filterBy : {...state.filterBy ,labels: [...state.filterBy.labels, action.label.name]}}
+                //     } else {
+                    // return {...state, filterBy : {...state.filterBy ,labels: state.filterBy.labels.filter(l => l !==  action.label.name)}}
+            return {...state, filterBy : {...state.filterBy ,labels: action.labels}}
+     
+        
             }
            
         case SET_SORT_BY:

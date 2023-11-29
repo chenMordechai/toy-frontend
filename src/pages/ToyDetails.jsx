@@ -49,7 +49,7 @@ export function ToyDetails() {
                     <h4>{toy.inStock && 'In Stock'}</h4>
                     {/* <h4>Labels:</h4> */}
                     <ul>
-                    {toy.labels.map(l=><li>{l},</li>)}
+                    {toy.labels.map((l,i)=><li key={i}>{l},</li>)}
                     </ul>
                 <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                     </div>

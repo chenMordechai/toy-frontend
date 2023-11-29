@@ -47,20 +47,38 @@ export function ToyIndex() {
 
     function onSetFilterBy(ev) {
         let { name, value, type, checked } = ev.target
+        console.log('name, value, type, checked:', name, value, type, checked)
         if (type === 'number') value = +value
         else if (type === 'checkbox') value = checked
-        setFilterBy({ name: value })
+        setFilterBy({ [name]: value })
         // setFilterByToEdit(prevFilter => ({...prevFilter , [name]:value}))
 
     }
 
-    function onSetSortBy(name, value) {
-        setSortBy({ name: value })
+    function onSetSortBy(ev) {
+        let { name, value, type, checked } = ev.target
+        if (type === 'checkbox') value = (checked) ? -1 : 1
+        setSortBy({ [name]: value })
         // setSortByToEdit(prevSort => ({...prevSort , [name] : value}))
     }
+
+    function handleChange(ev) {
+       
+    }
+
     function handleLabelChange(ev) {
-        let { name, checked } = ev.target
-        setLabels({ name, checked })
+        // console.log('ev:', ev)
+        // let { name, checked } = ev.target
+        let labels = ev.target.value
+        console.log('labels:', labels)
+    // const {
+    //   target: { value },
+    // } = event;
+    // setPersonName(
+    //   // On autofill we get a stringified value.
+    //   typeof value === 'string' ? value.split(',') : value,
+    // );
+        setLabels(labels)
     }
     function onToggleFilter() {
         setisFilterOpen(prev => !prev)

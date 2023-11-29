@@ -65,8 +65,8 @@ export function setSortBy(sortBy){
 
 }
 
-export function setLabels(label){
-    store.dispatch({ type: SET_LABEL, label })
+export function setLabels(labels){
+    store.dispatch({ type: SET_LABEL, labels })
 
 }
 

@@ -7,6 +7,7 @@ import { toyService } from "../services/toy.service"
 import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
 import { saveToy } from '../store/actions/toy.actions.js'
 import { Label } from "../cpms/Label.jsx";
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 export function ToyEdit() {
 
