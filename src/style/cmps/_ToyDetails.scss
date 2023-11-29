@@ -1,12 +1,12 @@
 .toy-details {
     background-color: $clr4;
     color: $clr6;
-
-    display: flex;
-    justify-content: space-evenly;
+    border-radius: 10px;
     padding: $pad2;
 
-    border-radius: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
 
     @include for-mobile-layout {
         flex-direction: column-reverse;
@@ -22,17 +22,26 @@
         // align-items: center;
         justify-content: center;
         width: max-content;
+        // margin-inline-end: 20px;
+        width: 40%;
 
         @include for-mobile-layout {
             width: 70%;
         }
     }
 
-    img {
-        width: 50%;
+    .img-container {
+        width: 40%;
         max-width: 400px;
+        a {
+            position: relative;
+            left: -14%;
+        }
         @include for-mobile-layout {
             width: 70%;
+            a {
+                left: -21%;
+            }
         }
     }
     h4 {

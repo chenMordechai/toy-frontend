@@ -51,9 +51,11 @@ export function ToyDetails() {
                     <ul>
                     {toy.labels.map((l,i)=><li key={i}>{l},</li>)}
                     </ul>
-                <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                     </div>
+                    <div className="img-container">
+                    <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                     <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
+                    </div>
                 </section>)}
 
         </section>

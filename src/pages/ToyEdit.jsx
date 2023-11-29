@@ -1,3 +1,12 @@
+import * as React from 'react';
+import { Box } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -8,6 +17,11 @@ import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
 import { saveToy } from '../store/actions/toy.actions.js'
 import { Label } from "../cpms/Label.jsx";
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { MultiSelectMu } from '../cpms/MultiSelectMu.jsx'
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBackward} from '@fortawesome/free-solid-svg-icons'
 
 export function ToyEdit() {
 
@@ -44,13 +58,11 @@ export function ToyEdit() {
     }
 
     function handleLabelChange(ev) {
-        let { name, checked } = ev.target
-        if (checked) {
-            setToyToEdit(prevToy => ({ ...prevToy, labels: [...prevToy.labels, name] }))
-        } else {
-            setToyToEdit(prevToy => ({ ...prevToy, labels: prevToy.labels.filter(l => l !== name) }))
-        }
+        let labels = ev.target.value
+        console.log('labels:', labels)
+            setToyToEdit(prevToy => ({ ...prevToy, labels }))
     }
+
 
     function onSubmitForm(ev) {
         ev.preventDefault()
@@ -68,29 +80,19 @@ export function ToyEdit() {
 
     return (
         <section className="toy-edit">
-            <h2>Toy Edit</h2>
             <form onSubmit={onSubmitForm}>
-                <label htmlFor="name">Name</label>
-                <input onChange={handleChange} value={toyToEdit.name} type="text" id="name" name="name" />
-
-                <label htmlFor="price">Price</label>
-                <input onChange={handleChange} value={toyToEdit.price} type="number" id="price" name="price" />
-
-                <label htmlFor="inStock">In Stock?</label>
-                <input onChange={handleChange} checked={toyToEdit.inStock} type="checkbox" id="instock" name="inStock" />
-
-                <div>
-                    Labels:
-                </div>
-                <ul className="labels">
-                    {labels.map((label, idx) =>
-                        <Label key={idx} labels={toyToEdit.labels} label={label} idx={idx} handleLabelChange={handleLabelChange} />)}
-                </ul>
-
-                <button>Save</button>
+            <TextField id="outlined-basic" label="Name" variant="outlined" onChange={handleChange} value={toyToEdit.name} name="name" type="text"/>
+                    <TextField id="outlined-basic" label="Price" variant="outlined" onChange={handleChange} value={toyToEdit.price}  name="price" type="number"/>
+                <FormControlLabel  control={<Checkbox name="inStock" checked={(toyToEdit.inStock)}  onChange={handleChange} />} label="In Stock?" />
+                <MultiSelectMu options={labels} label="Labels" checkedOptions={toyToEdit.labels} handleChange={handleLabelChange} />
+                <button className="btn dark">Save</button>
             </form>
 
-            <button><Link to="/toy">Back</Link></button>
+<div className="img-container">
+
+<Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
+            <img src={`/src/assets/img/${toyToEdit.imgId}.png`} alt="" />
+</div>
         </section>
     )
 }

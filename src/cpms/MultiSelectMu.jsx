@@ -44,7 +44,7 @@ export function MultiSelectMu({options , label , checkedOptions ,handleChange}) 
   };
 
   return (
-    <div>
+    // <div>
       <FormControl >
         <InputLabel id="demo-multiple-checkbox-label">{label}</InputLabel>
         <Select
@@ -65,6 +65,6 @@ export function MultiSelectMu({options , label , checkedOptions ,handleChange}) 
           ))}
         </Select>
       </FormControl>
-    </div>
+    // </div>
   );
 }
