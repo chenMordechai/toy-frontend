@@ -1,0 +1,21 @@
+.category-list {
+    grid-area: category;
+    // width: 140px;
+    background-color: $clr2;
+    margin-top: -70px;
+    z-index: 1;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    padding: $pad2;
+    padding-top: 150px;
+
+    position: sticky;
+    top: 0;
+
+    h3 {
+        color: $clr6;
+    }
+}

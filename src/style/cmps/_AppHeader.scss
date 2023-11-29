@@ -9,8 +9,12 @@
   // padding: 1em;
   display: flex;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
   position: sticky;
   top: 0;
+  // background-color: inherit;
+  // z-index: 4;
 }
 
 /* @media (max-width: 720px) {

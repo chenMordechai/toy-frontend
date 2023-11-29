@@ -1,10 +1,34 @@
 .main-layout {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto auto 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "nav  header"
-    "nav main";
+    "nav category  header"
+    "nav category main";
+
+  @include for-mobile-layout {
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      " header"
+      " main"
+      " nav";
+
+    .category-list {
+      display: none;
+    }
+    // &.sidebar-open {
+    //   overflow: hidden;
+    // }
+    // body {
+    //   background-color: red;
+    // }
+
+    // .NavSide,
+    //   .category-list {
+    //     display: none;
+    //   }
+  }
 
   main {
     grid-area: main;

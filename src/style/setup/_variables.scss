@@ -11,13 +11,13 @@ $clr7: rgb(17 39 227);
 // LAYOUT
 $pad1: 10px;
 $pad2: 15px;
-$layoutPadding: 20px;
+// $layoutPadding: 20px;
 
 // LAYOUT BREAKPOINTS
-$break-narrow: 1200px;
+$break-narrow: 700px;
 $break-normal: 1360px;
 $break-wide: 1920px;
 
-$padded-break-narrow: $break-narrow + $layoutPadding * 2;
-$padded-break-normal: $break-normal + $layoutPadding * 2;
-$padded-break-wide: $break-wide + $layoutPadding * 2;
+// $padded-break-narrow: $break-narrow + $layoutPadding * 2;
+// $padded-break-normal: $break-normal + $layoutPadding * 2;
+// $padded-break-wide: $break-wide + $layoutPadding * 2;

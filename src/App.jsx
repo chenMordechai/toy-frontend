@@ -11,6 +11,7 @@ import { ToyDetails } from './pages/ToyDetails'
 import { ToyEdit } from './pages/ToyEdit'
 import { AppHeader } from './cpms/AppHeader'
 import { NavSide } from './cpms/NavSide'
+import { CategoryList } from './cpms/CategoryList'
 
 export function App() {
 
@@ -20,6 +21,10 @@ export function App() {
         <section className="main-layout app">
           <AppHeader />
           <NavSide />
+
+          <CategoryList />
+
+
           <main>
             <Routes>
               <Route element={<HomePage />} path="/" />

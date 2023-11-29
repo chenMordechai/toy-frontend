@@ -14,10 +14,17 @@
     z-index: 2;
     height: 100vh;
 
+    @include for-mobile-layout {
+        flex-direction: row;
+        height: max-content;
+        bottom: 0;
+        gap: 0;
+        justify-content: space-between;
+    }
     div {
         background-color: darken($clr1, 2%);
-        width: 50px;
-        height: 50px;
+        width: em(50px);
+        height: em(50px);
         padding: $pad1;
         border-radius: 50%;
         font-size: 1.5em;
@@ -26,10 +33,21 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @include for-mobile-layout {
+            // width: 40px;
+            // height: 40px;
+            font-size: 1.2em;
+        }
     }
 
     div:first-child {
         margin-bottom: 80px;
+
+        @include for-mobile-layout {
+            margin: 0;
+            margin-inline-end: 20px;
+        }
     }
 
     div.blue {

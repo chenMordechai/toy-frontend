@@ -9,6 +9,8 @@ import { ToyFilter } from '../cpms/ToyFilter.jsx'
 import { ToySort } from '../cpms/ToySort.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { CategoryList } from '../cpms/CategoryList.jsx'
+import logoUrl from '../assets/img/logo.png'
+
 
 export function ToyIndex() {
 
@@ -19,9 +21,9 @@ export function ToyIndex() {
     // const [filterByToEdit, setFilterByToEdit] = useState(toyService.getDefaultFilter())
     // console.log('filterByToEdit:', filterByToEdit)
     const labels = toyService.getLabels()
-  
-    // const [sortByToEdit, setSortByToEdit] = useState(toyService.getDefaultSort())
 
+    // const [sortByToEdit, setSortByToEdit] = useState(toyService.getDefaultSort())
+    const [isFilterOpen, setisFilterOpen] = useState(false)
 
     useEffect(() => {
         // console.log('sortByToEdit:', sortByToEdit)
@@ -57,8 +59,11 @@ export function ToyIndex() {
         let { name, checked } = ev.target
         setLabels({ name, checked })
     }
+    function onToggleFilter() {
+        setisFilterOpen(prev => !prev)
+    }
 
-  
+
     // function onSetLabels(name, checked) {
 
     //     // if (checked) {
@@ -71,14 +76,23 @@ export function ToyIndex() {
     return (
         <section className="toy-index">
 
-            <section className="category-container">
+            {/* <section className="category-container">
               <CategoryList/>
-            </section>
+            </section> */}
 
             <section className="filter-container">
-                {/* <button><Link to="/toy/edit">Add New Toy</Link></button> */}
-                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} />
-                <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
+                {isFilterOpen && <section>
+                    <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} />
+                    <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
+                    <button><Link to="/toy/edit">Add New Toy</Link></button>
+                </section>}
+                {!isFilterOpen && <section >
+                    <div>
+                        <h3>Find your best Toys for yor Children</h3>
+                        <button className="btn dark" onClick={onToggleFilter}>Get Start</button>
+                    </div>
+                    <img src={logoUrl} />
+                </section>}
             </section>
 
             <section className="list-container">
