@@ -20,7 +20,7 @@ export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange }) {
             <form >
                 <label htmlFor="name">Name:</label>
                 <input onChange={handleChange} value={filterBy.name} type="text" id="name" name="name" />
-                {/* 
+
                 <label htmlFor="price">Max Price:</label>
                 <input onChange={handleChange} value={filterBy.price} type="number" id="price" name="price" />
 
@@ -30,14 +30,14 @@ export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange }) {
                     <option value="inStock">In Stock</option>
                     <option value="notInStock">Not In Stock</option>
                 </select>
-            
+
                 <div>
                     Labels:
                 </div>
                 <ul className="labels">
                     {labelsToShow.map((label, idx) =>
                         <Label key={idx} labels={filterBy.labels} label={label} idx={idx} handleLabelChange={handleLabelChange} />)}
-                </ul> */}
+                </ul>
             </form>
 
 

@@ -23,7 +23,7 @@ export function ToyIndex() {
     const labels = toyService.getLabels()
 
     // const [sortByToEdit, setSortByToEdit] = useState(toyService.getDefaultSort())
-    const [isFilterOpen, setisFilterOpen] = useState(false)
+    // const [isFilterOpen, setisFilterOpen] = useState(false)
 
     useEffect(() => {
         // console.log('sortByToEdit:', sortByToEdit)
@@ -81,18 +81,18 @@ export function ToyIndex() {
             </section> */}
 
             <section className="filter-container">
-                {isFilterOpen && <section>
-                    <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} />
+                <section>
+                    <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} />
                     <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
                     <button><Link to="/toy/edit">Add New Toy</Link></button>
-                </section>}
-                {!isFilterOpen && <section >
+                </section>
+                {/* {!isFilterOpen && <section >
                     <div>
                         <h3>Find your best Toys for yor Children</h3>
                         <button className="btn dark" onClick={onToggleFilter}>Get Start</button>
                     </div>
                     <img src={logoUrl} />
-                </section>}
+                </section>} */}
             </section>
 
             <section className="list-container">

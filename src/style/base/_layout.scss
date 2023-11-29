@@ -33,6 +33,8 @@
   main {
     grid-area: main;
     background-color: $clr3;
+    min-height: 100vh;
+    padding: $pad1;
   }
 }
 
