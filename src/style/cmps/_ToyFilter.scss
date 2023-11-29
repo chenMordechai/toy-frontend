@@ -1,15 +1,18 @@
 .toy-filter {
-    // background-color: $clr4;
-    // grid-area: filter;
-    // width: 140px;
-
-    // background-color: var(--clr2bg);
-    // padding: 1em;
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $pad2;
+        // justify-content: space-between;
+        justify-content: center;
+        div {
+            width: 200px;
+        }
+        label {
+            margin: 0;
+        }
+    }
 }
 
 .toy-filter form {
-    // display: grid;
-    // grid-template-columns: 80px 170px;
-    // gap: 10px;
-    /* justify-items: start; */
 }

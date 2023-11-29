@@ -1,46 +1,11 @@
 .toy-index {
-    padding: $pad1;
     .filter-container {
-        grid-area: filter;
-        // height: 140px;
-        width: 100%;
         background-color: $clr4;
         border-radius: 10px;
-        margin-bottom: 0;
         padding: $pad2;
 
-        display: flex;
-        align-items: center;
-
-        section {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-
-            @include for-mobile-layout {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            div {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 5px;
-                justify-content: center;
-
-                h3 {
-                    color: $clr6;
-                    margin: 0;
-                    // margin-inline-end: 0.5em;
-                }
-            }
-
-            img {
-                // height: 100%;
-                // height: ;
-                width: 200px;
-            }
-        }
+        // display: flex;
+        // justify-content: space-between;
     }
 
     .list-container {

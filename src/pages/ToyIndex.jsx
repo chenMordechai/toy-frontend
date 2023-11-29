@@ -45,7 +45,10 @@ export function ToyIndex() {
             })
     }
 
-    function onSetFilterBy(name, value) {
+    function onSetFilterBy(ev) {
+        let { name, value, type, checked } = ev.target
+        if (type === 'number') value = +value
+        else if (type === 'checkbox') value = checked
         setFilterBy({ name: value })
         // setFilterByToEdit(prevFilter => ({...prevFilter , [name]:value}))
 
@@ -81,11 +84,13 @@ export function ToyIndex() {
             </section> */}
 
             <section className="filter-container">
-                <section>
-                    <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} />
-                    <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} />
-                    <button><Link to="/toy/edit">Add New Toy</Link></button>
-                </section>
+
+                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels}  sortBy={sortBy} onSetSortBy={onSetSortBy} />
+                <div>
+                    {/* <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} /> */}
+                    {/* <Link className="btn dark" to="/toy/edit">Add New Toy</Link> */}
+                </div>
+
                 {/* {!isFilterOpen && <section >
                     <div>
                         <h3>Find your best Toys for yor Children</h3>
