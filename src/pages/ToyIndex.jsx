@@ -57,6 +57,7 @@ export function ToyIndex() {
 
     function onSetSortBy(ev) {
         let { name, value, type, checked } = ev.target
+        console.log('name, value, type, checked :', name, value, type, checked )
         if (type === 'checkbox') value = (checked) ? -1 : 1
         setSortBy({ [name]: value })
         // setSortByToEdit(prevSort => ({...prevSort , [name] : value}))
@@ -106,14 +107,6 @@ export function ToyIndex() {
                 <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels}  sortBy={sortBy} onSetSortBy={onSetSortBy} />
                     {/* <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} /> */}
                     {/* <Link className="btn dark" to="/toy/edit">Add New Toy</Link> */}
-
-                {/* {!isFilterOpen && <section >
-                    <div>
-                        <h3>Find your best Toys for yor Children</h3>
-                        <button className="btn dark" onClick={onToggleFilter}>Get Start</button>
-                    </div>
-                    <img src={logoUrl} />
-                </section>} */}
             </section>
 
             <section className="list-container">

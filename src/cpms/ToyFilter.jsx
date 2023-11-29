@@ -38,7 +38,7 @@ export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange, labelsTo
                             <Label key={idx} labels={filterBy.labels} label={label} idx={idx} handleLabelChange={handleLabelChange} />)}
                     </ul> */}
                 <SelectMu handleChange={onSetSortBy} name="type" value={sortBy.type}   label="Sort by" options={['Name','Price','Created At']} values={['name','price','createdAt']} />
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                <FormControlLabel  control={<Checkbox name="desc" checked={(sortBy.desc === -1)}  onChange={onSetSortBy} />} label="Descending" />
 
                 <Link className="btn dark" to="/toy/edit">Add New Toy</Link>
 
