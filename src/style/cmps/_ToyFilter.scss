@@ -5,8 +5,13 @@
         gap: $pad2;
         // justify-content: space-between;
         justify-content: center;
-        div {
+        align-items: center;
+        div,
+        label {
             width: 200px;
+            @include for-mobile-layout {
+                width: 130px;
+            }
         }
         label {
             margin: 0;

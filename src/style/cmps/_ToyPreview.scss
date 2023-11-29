@@ -1,14 +1,36 @@
 .toy-preview {
-    text-align: center;
-    padding: 0.3em;
+    // text-align: center;
+    // padding: 0.3em;
     display: flex;
     flex-direction: column;
-}
-.toy-preview h4 {
-    text-transform: capitalize;
-    color: black;
-}
+    // align-items: center;
+    // gap: $pad2;
+    color: $clr6;
+    font-size: 0.8em;
 
-.toy-preview img {
-    max-width: 100px;
+    .img-container {
+        align-self: center;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-block-end: $pad2;
+
+        img {
+            height: 70%;
+            width: 70%;
+        }
+    }
+
+    h3,
+    h4 {
+        margin: 0;
+    }
+    h4 {
+        color: $clr7;
+    }
 }

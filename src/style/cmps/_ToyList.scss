@@ -4,15 +4,29 @@
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
+        color: $clr5;
+        // align-items: center;
+        justify-content: center;
 
         li {
             display: flex;
             flex-direction: column;
+            gap: $pad1;
             background-color: lightcoral;
-            max-width: 200px;
-            height: 350px;
             background-color: $clr1;
             border-radius: 10px;
+            padding: $pad1;
+            width: 200px;
+
+            .controls {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.3em;
+
+                svg {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

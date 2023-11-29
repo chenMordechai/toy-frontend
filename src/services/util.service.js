@@ -6,7 +6,8 @@ export const utilService = {
     saveToStorage,
     animateCSS,
     debounce,
-    getAssetSrc
+    getAssetSrc,
+    getRandomColor
 }
 
 function makeId(length = 6) {
@@ -81,3 +82,8 @@ function getAssetSrc(name) {
     const mod = modules[path]
     return mod.default
 }
+
+function getRandomColor() {
+  const  color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+    return color;
+  }

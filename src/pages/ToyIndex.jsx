@@ -86,10 +86,8 @@ export function ToyIndex() {
             <section className="filter-container">
 
                 <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels}  sortBy={sortBy} onSetSortBy={onSetSortBy} />
-                <div>
                     {/* <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} /> */}
                     {/* <Link className="btn dark" to="/toy/edit">Add New Toy</Link> */}
-                </div>
 
                 {/* {!isFilterOpen && <section >
                     <div>
