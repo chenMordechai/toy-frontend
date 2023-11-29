@@ -15,7 +15,7 @@ export function ToyPreview({ toy }) {
             {/* <h4>Labels:</h4> */}
             {toy.labels.map(l => <span key={l}>{l}</span>)}
             {/* <img src={utilService.getAssetSrc(toy.imgId)} /> */}
-            <img src={`/src/assets/img/${toy.imgId}.jpg`} alt="" />
+            <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
             {/* <img src={logoUrl} /> */}
         </section>
     )
