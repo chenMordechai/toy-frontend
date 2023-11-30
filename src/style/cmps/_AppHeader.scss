@@ -2,24 +2,11 @@
   grid-area: header;
   height: 70px;
   width: 100%;
-
   background-color: $clr3;
 
-  color: var(--clr1bg);
-  // padding: 1em;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
+  @include flex(row, center, center, $pad1);
+
   position: sticky;
   top: 0;
   z-index: 2;
-  // background-color: inherit;
-  // z-index: 4;
 }
-
-/* @media (max-width: 720px) {
-  .app-header {
-    color: var(--clr2bg);
-  }
-} */

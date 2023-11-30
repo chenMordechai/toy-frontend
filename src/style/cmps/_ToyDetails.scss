@@ -1,12 +1,8 @@
 .toy-details {
-    background-color: $clr4;
-    color: $clr6;
-    border-radius: 10px;
-    padding: $pad2;
+    position: relative;
+    @include section;
 
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-evenly;
+    @include flex(row-reverse, center, space-evenly);
 
     @include for-mobile-layout {
         flex-direction: column-reverse;
@@ -15,14 +11,9 @@
     }
 
     .details-container {
-        display: flex;
-        flex-direction: column;
-        gap: $pad1;
+        @include flex(column, center, center, $pad1);
+
         text-align: center;
-        // align-items: center;
-        justify-content: center;
-        width: max-content;
-        // margin-inline-end: 20px;
         width: 40%;
 
         @include for-mobile-layout {
@@ -32,16 +23,14 @@
 
     .img-container {
         width: 40%;
-        max-width: 400px;
+        max-width: 250px;
         a {
-            position: relative;
-            left: -14%;
+            position: absolute;
+            top: $pad2;
+            left: $pad2;
         }
         @include for-mobile-layout {
             width: 70%;
-            a {
-                left: -21%;
-            }
         }
     }
     h4 {

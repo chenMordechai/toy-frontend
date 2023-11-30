@@ -5,11 +5,8 @@
     z-index: 1;
     min-height: 100vh;
 
-    display: flex;
-    flex-direction: column;
-    padding: $pad2;
-    // padding-top: 150px;
-    justify-content: center;
+    padding: 100px $pad2;
+
     position: sticky;
     top: 0;
     height: 100vh;

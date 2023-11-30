@@ -1,10 +1,7 @@
 .nav-side {
     grid-area: nav;
 
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
+    @include flex(column, center, start, $pad3);
 
     background-color: $clr1;
     padding: $pad2;
@@ -16,13 +13,13 @@
 
     @include for-mobile-layout {
         flex-direction: row;
+        justify-content: space-between;
+        gap: 0;
         height: max-content;
         bottom: 0;
-        gap: 0;
-        justify-content: space-between;
     }
     div {
-        background-color: darken($clr1, 2%);
+        background-color: darken($clr1, 3%);
         width: em(50px);
         height: em(50px);
         padding: $pad1;
@@ -30,13 +27,9 @@
         font-size: 1.5em;
         cursor: pointer;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex(column, center, center);
 
         @include for-mobile-layout {
-            // width: 40px;
-            // height: 40px;
             font-size: 1.2em;
         }
     }

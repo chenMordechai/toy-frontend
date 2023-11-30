@@ -1,26 +1,18 @@
 .toy-edit {
-    background-color: $clr4;
-    border-radius: 10px;
-    padding: $pad2;
-    color: $clr6;
+    position: relative;
+    @include section;
 
-    display: flex;
-    flex-direction: row-reverse;
-
-    justify-content: space-evenly;
+    @include flex(row-reverse, center, space-evenly);
 
     @include for-mobile-layout {
-        flex-direction: column;
-        align-items: center;
-        gap: $pad2;
+        @include flex(column, center, center, $pad2);
     }
 
     form {
-        display: flex;
-        flex-direction: column;
+        @include flex(column, stretch, center, $pad1);
+
+        padding: $pad2;
         width: 40%;
-        gap: $pad1;
-        justify-content: center;
 
         button {
             align-self: start;
@@ -34,18 +26,16 @@
 
     .img-container {
         width: 40%;
+        max-width: 250px;
 
         a {
-            position: relative;
-            left: -14%;
+            position: absolute;
+            top: $pad2;
+            left: $pad2;
         }
         @include for-mobile-layout {
             display: flex;
             flex-direction: column-reverse;
-
-            a {
-                left: -70%;
-            }
         }
     }
 }

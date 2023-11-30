@@ -1,27 +1,27 @@
 .toy-list {
     padding-top: $pad1;
     ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+        @include flex(row, center, center, $pad1, wrap);
         color: $clr5;
-        // align-items: center;
-        justify-content: center;
 
         li {
-            display: flex;
-            flex-direction: column;
-            gap: $pad1;
-            background-color: lightcoral;
+            @include flex(column, center, center, $pad1);
+
             background-color: $clr1;
             border-radius: 10px;
             padding: $pad1;
             width: 200px;
 
+            @include for-mobile-layout {
+                padding: $pad2;
+                flex-grow: 1;
+            }
+
             .controls {
                 display: flex;
                 justify-content: space-between;
                 font-size: 1.3em;
+                width: 100%;
 
                 svg {
                     cursor: pointer;

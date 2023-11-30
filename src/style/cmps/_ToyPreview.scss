@@ -1,10 +1,6 @@
 .toy-preview {
-    // text-align: center;
-    // padding: 0.3em;
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    // gap: $pad2;
     color: $clr6;
     font-size: 0.8em;
 
@@ -14,23 +10,20 @@
         width: 150px;
         border-radius: 50%;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex(row, center, center);
 
         margin-block-end: $pad2;
+
+        @include for-mobile-layout {
+            padding: $pad2;
+            flex-wrap: wrap;
+            height: 180px;
+            width: 180px;
+        }
 
         img {
             height: 70%;
             width: 70%;
         }
-    }
-
-    h3,
-    h4 {
-        margin: 0;
-    }
-    h4 {
-        color: $clr7;
     }
 }

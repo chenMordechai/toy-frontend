@@ -1,11 +1,7 @@
 .toy-filter {
     form {
-        display: flex;
-        flex-wrap: wrap;
-        gap: $pad2;
-        // justify-content: space-between;
-        justify-content: center;
-        align-items: center;
+        @include flex(row, center, center, $pad2, wrap);
+
         div,
         label {
             width: 200px;
@@ -17,7 +13,4 @@
             margin: 0;
         }
     }
-}
-
-.toy-filter form {
 }
