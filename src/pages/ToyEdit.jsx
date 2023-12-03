@@ -21,7 +21,7 @@ import { MultiSelectMu } from '../cpms/MultiSelectMu.jsx'
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBackward} from '@fortawesome/free-solid-svg-icons'
+import { faBackward } from '@fortawesome/free-solid-svg-icons'
 
 export function ToyEdit() {
 
@@ -36,17 +36,18 @@ export function ToyEdit() {
 
     }, [toyId])
 
-    function loadToy() {
-        dispatch({ type: SET_IS_LOADING, isLoading: true })
-        toyService.getById(toyId)
-            .then(setToyToEdit)
-            .catch((err) => {
-                console.log('Had issues in toy details', err)
-                navigate('/toy')
-            })
-            .finally(() => {
-                dispatch({ type: SET_IS_LOADING, isLoading: false })
-            })
+    async function loadToy() {
+        try {
+            dispatch({ type: SET_IS_LOADING, isLoading: true })
+            const toy = await toyService.getById(toyId)
+            setToyToEdit(toy)
+        } catch (err) {
+            console.log('Had issues in toy details', err)
+            navigate('/toy')
+        } finally {
+            dispatch({ type: SET_IS_LOADING, isLoading: false })
+        }
+
     }
 
     function handleChange(ev) {
@@ -60,39 +61,39 @@ export function ToyEdit() {
     function handleLabelChange(ev) {
         let labels = ev.target.value
         console.log('labels:', labels)
-            setToyToEdit(prevToy => ({ ...prevToy, labels }))
+        setToyToEdit(prevToy => ({ ...prevToy, labels }))
     }
 
 
-    function onSubmitForm(ev) {
+    async function onSubmitForm(ev) {
         ev.preventDefault()
-        saveToy({ ...toyToEdit })
-            .then(() => {
-                showSuccessMsg('Update Toy: ' + toyId)
-                navigate('/toy')
-            })
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot Update Toy')
-            })
+        try {
+            await saveToy({ ...toyToEdit })
+            showSuccessMsg('Update Toy: ' + toyId)
+            navigate('/toy')
+        } catch (err) {
+            console.log('err:', err)
+            showErrorMsg('Cannot Update Toy')
+
+        }
     }
 
 
     return (
         <section className="toy-edit">
             <form onSubmit={onSubmitForm}>
-            <TextField id="outlined-basic" label="Name" variant="outlined" onChange={handleChange} value={toyToEdit.name} name="name" type="text"/>
-                    <TextField id="outlined-basic" label="Price" variant="outlined" onChange={handleChange} value={toyToEdit.price}  name="price" type="number"/>
-                <FormControlLabel  control={<Checkbox name="inStock" checked={(toyToEdit.inStock)}  onChange={handleChange} />} label="In Stock?" />
+                <TextField id="outlined-basic" label="Name" variant="outlined" onChange={handleChange} value={toyToEdit.name} name="name" type="text" />
+                <TextField id="outlined-basic" label="Price" variant="outlined" onChange={handleChange} value={toyToEdit.price} name="price" type="number" />
+                <FormControlLabel control={<Checkbox name="inStock" checked={(toyToEdit.inStock)} onChange={handleChange} />} label="In Stock?" />
                 <MultiSelectMu options={labels} label="Labels" checkedOptions={toyToEdit.labels} handleChange={handleLabelChange} />
                 <button className="btn dark">Save</button>
             </form>
 
-<div className="img-container">
+            <div className="img-container">
 
-<Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
-            <img src={`/src/assets/img/${toyToEdit.imgId}.png`} alt="" />
-</div>
+                <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
+                <img src={`/src/assets/img/${toyToEdit.imgId}.png`} alt="" />
+            </div>
         </section>
     )
 }

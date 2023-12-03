@@ -20,23 +20,23 @@ export function ToyIndex() {
     const { isLoading } = useSelector(storeState => storeState.toyModule)
     const labels = toyService.getLabels()
 
-
     useEffect(() => {
-        loadToys()
-            .catch(err => {
-                console.log('err:', err)
-            })
+        try {
+            loadToys()
+        } catch (err) {
+            console.log('err:', err)
+        }
     }, [filterBy, sortBy])
 
-    function onRemoveToy(toyId) {
-        removeToy(toyId)
-            .then(() => {
-                showSuccessMsg('Remove Toy: ' + toyId)
-            })
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot Remove Toy')
-            })
+    async function onRemoveToy(toyId) {
+        try {
+            await removeToy(toyId)
+            showSuccessMsg('Remove Toy: ' + toyId)
+
+        } catch (err) {
+            console.log('err:', err)
+            showErrorMsg('Cannot Remove Toy')
+        }
     }
 
     function onSetFilterBy(ev) {
@@ -45,23 +45,17 @@ export function ToyIndex() {
         if (type === 'number') value = +value
         else if (type === 'checkbox') value = checked
         setFilterBy({ [name]: value })
-        // setFilterByToEdit(prevFilter => ({...prevFilter , [name]:value}))
-
     }
 
     function onSetSortBy(ev) {
         let { name, value, type, checked } = ev.target
         if (type === 'checkbox') value = (checked) ? -1 : 1
         setSortBy({ [name]: value })
-        // setSortByToEdit(prevSort => ({...prevSort , [name] : value}))
     }
 
 
     function handleLabelChange(ev) {
-        // console.log('ev:', ev)
-        // let { name, checked } = ev.target
         let labels = ev.target.value
-        console.log('labels:', labels)
         setLabels(labels)
     }
 

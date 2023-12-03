@@ -1,10 +1,7 @@
 
 import { storageService } from './async-storage.service.js'
-import { httpService } from './http.service.js'
 
-
-const BASE_URL_USER = 'user/'
-const BASE_URL_AUTH = 'auth/'
+const STORAGE_KEY = 'userDB'
 const STORAGE_KEY_LOGGEDIN = 'loggedinUser'
 
 export const userService = {
@@ -19,31 +16,28 @@ export const userService = {
 
 
 async function query() {
-    return httpService.get(BASE_URL_USER)
+    return storageService.query(STORAGE_KEY)
 }
 
 async function getById(userId) {
-    const user = await httpService.get(BASE_URL_USER + userId)
-    return user
+    return storageService.get(STORAGE_KEY, userId)
 }
 
 async function remove(userId) {
-    return httpService.delete(BASE_URL_USER + userId)
+    return storageService.remove('user', userId)
 }
 
 async function update(user) {
-    user = await httpService.put(BASE_URL_USER + user._Id, user)
-    // Handle case in which admin updates other user's details
-    if (getLoggedinUser()._id === user._id) _setLoggedinUser(user)
-    return user
+    return await storageService.put('user', user)
 }
 
 
-async function login(userCred) {
-    const user = await httpService.post(BASE_URL_AUTH + 'login', userCred)
-    if (user) {
-        return _setLoggedinUser(user)
-    }
+async function login({ username, password }) {
+    const users = await storageService.query(STORAGE_KEY)
+    const user = users.find(user => user.username === username)
+    if (user) return _setLoggedinUser(user)
+    else return Promise.reject('Invalid login')
+
 }
 
 async function signup({ username, password, fullname }) {
@@ -51,18 +45,17 @@ async function signup({ username, password, fullname }) {
         username,
         password,
         fullname,
-        isAdmin: false,
+        isAdmin: false
     }
+    const user = await storageService.post(STORAGE_KEY, userToSave)
+    return saveLocalUser(user)
 
-    const user = await httpService.post(BASE_URL_AUTH + 'signup', userToSave)
-    return _setLoggedinUser(user)
 
 }
 
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN)
-    return await httpService.post(BASE_URL_AUTH + 'logout')
-
+    return Promise.resolve()
 }
 
 
@@ -81,8 +74,7 @@ function getLoggedinUser() {
 }
 
 function _setLoggedinUser(user) {
-    const { _id, fullname, isAdmin } = user
-    const userToSave = { _id, fullname, isAdmin }
+    const userToSave = { _id: user._id, fullname: user.fullname, score: user.score }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }
