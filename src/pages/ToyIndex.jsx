@@ -38,7 +38,6 @@ export function ToyIndex() {
 
     function onSetFilterBy(ev) {
         let { name, value, type, checked } = ev.target
-        console.log('name, value, type, checked:', name, value, type, checked)
         if (type === 'number') value = +value
         else if (type === 'checkbox') value = checked
         setFilterBy({ [name]: value })

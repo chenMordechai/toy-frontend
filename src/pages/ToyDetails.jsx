@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
@@ -35,8 +35,8 @@ export function ToyDetails() {
 
 
 
-    async function onSaveToyMsg(msgTxt) {
-        saveToyMsg(msgTxt, toy._id)
+    async function onSaveToyMsg(msg) {
+        saveToyMsg(msg, toy._id)
     }
 
     return (
@@ -44,21 +44,21 @@ export function ToyDetails() {
             {isLoading && 'Loading...'}
             {!isLoading && toy &&
                 (<section className="toy-details">
-                    <section  className="details-container" >
-                    <div >
-                        <h4>{toy.name}</h4>
-                        {/* <h4>Id: {toy._id}</h4> */}
-                        <h4>$ {toy.price}</h4>
-                        <h4>{toy.inStock && 'In Stock'}</h4>
-                        {/* <h4>Labels:</h4> */}
-                        <ul>
-                            {toy.labels.map((l, i) => <li key={i}>{l},</li>)}
-                        </ul>
-                    </div>
-                    <div className="img-container">
-                        <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
-                        <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
-                    </div>
+                    <section className="details-container" >
+                        <div >
+                            <h4>{toy.name}</h4>
+                            {/* <h4>Id: {toy._id}</h4> */}
+                            <h4>$ {toy.price}</h4>
+                            <h4>{toy.inStock && 'In Stock'}</h4>
+                            {/* <h4>Labels:</h4> */}
+                            <ul>
+                                {toy.labels.map((l, i) => <li key={i}>{l},</li>)}
+                            </ul>
+                        </div>
+                        <div className="img-container">
+                            <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
+                            <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
+                        </div>
                     </section>
                     <section className="msgs-container">
                         <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />

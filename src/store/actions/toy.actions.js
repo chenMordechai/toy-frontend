@@ -65,9 +65,9 @@ export async function saveToy(toy) {
     }
 }
 
-export async function saveToyMsg(msgTxt, toyId) {
+export async function saveToyMsg(msg, toyId) {
     try {
-        const msgToSave = await toyService.saveMsg(msgTxt, toyId)
+        const msgToSave = await toyService.saveMsg(msg, toyId)
         store.dispatch({ type: UPDATE_TOY_MSGS, msg: msgToSave })
         return msgToSave
 
