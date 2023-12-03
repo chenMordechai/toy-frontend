@@ -31,7 +31,7 @@ export function AppHeader() {
 
             {user && <section className="user-info">
                 {/* <NavLink to={'/signup'}>Logout</NavLink> */}
-                <NavLink onClick={onLogout}>Logout</NavLink>
+                <button onClick={onLogout}>Logout</button>
                 <span>{user.fullname}</span>
                 {user.isAdmin && <span>Admin</span>}
             </section>}

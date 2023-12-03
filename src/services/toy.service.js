@@ -17,7 +17,8 @@ export const toyService = {
     getLabels,
     getDefaultSort,
     getCategories,
-    getCategoriesIcons
+    getCategoriesIcons,
+    saveMsg
 }
 
 async function query(filterBy = {}, sortBy = {}) {
@@ -93,6 +94,10 @@ async function save(toy) {
     }
 }
 
+async function saveMsg(txt, toyId) {
+    return httpService.post(BASE_URL + toyId + '/msg', { txt })
+}
+
 function getEmptyToy() {
     return {
         name: '',
@@ -102,7 +107,6 @@ function getEmptyToy() {
 
     }
 }
-
 
 function getDefaultFilter() {
     return { name: '', inStock: 'all', labels: [], price: '' }

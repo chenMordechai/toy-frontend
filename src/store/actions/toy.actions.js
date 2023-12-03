@@ -1,5 +1,5 @@
 import { toyService } from "../../services/toy.service.js";
-import { ADD_TOY, REMOVE_TOY, SET_TOYS, UPDATE_TOY, SET_IS_LOADING, SET_FILTER_BY, SET_SORT_BY, SET_LABEL, SET_FILTER_CATEGORY } from "../reducers/toy.reducer.js";
+import { ADD_TOY, REMOVE_TOY, SET_TOYS, UPDATE_TOY, SET_IS_LOADING, SET_FILTER_BY, SET_SORT_BY, SET_LABEL, SET_FILTER_CATEGORY, UPDATE_TOY_MSGS, SET_TOY } from "../reducers/toy.reducer.js";
 import { store } from "../store.js";
 
 export async function loadToys() {
@@ -11,6 +11,19 @@ export async function loadToys() {
         store.dispatch({ type: SET_TOYS, toys })
     } catch (err) {
         console.log('toy action -> Cannot load toys', err)
+        throw err
+    } finally {
+        store.dispatch({ type: SET_IS_LOADING, isLoading: false })
+    }
+}
+
+export async function loadToy(toyId) {
+    try {
+        store.dispatch({ type: SET_IS_LOADING, isLoading: true })
+        const toy = await toyService.getById(toyId)
+        store.dispatch({ type: SET_TOY, toy })
+    } catch (err) {
+        console.log('toy action -> Cannot load toy', err)
         throw err
     } finally {
         store.dispatch({ type: SET_IS_LOADING, isLoading: false })
@@ -50,6 +63,20 @@ export async function saveToy(toy) {
         throw err
 
     }
+}
+
+export async function saveToyMsg(msgTxt, toyId) {
+    try {
+        const msgToSave = await toyService.saveMsg(msgTxt, toyId)
+        store.dispatch({ type: UPDATE_TOY_MSGS, msg: msgToSave })
+        return msgToSave
+
+    } catch (err) {
+        console.log('toy action -> Cannot save toy msg', err)
+        throw err
+
+    }
+
 }
 
 export function setFilterBy(filterBy) {
