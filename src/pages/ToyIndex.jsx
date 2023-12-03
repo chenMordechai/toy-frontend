@@ -18,15 +18,10 @@ export function ToyIndex() {
     const { filterBy } = useSelector(storeState => storeState.toyModule)
     const { sortBy } = useSelector(storeState => storeState.toyModule)
     const { isLoading } = useSelector(storeState => storeState.toyModule)
-    // const [filterByToEdit, setFilterByToEdit] = useState(toyService.getDefaultFilter())
-    // console.log('filterByToEdit:', filterByToEdit)
     const labels = toyService.getLabels()
 
-    // const [sortByToEdit, setSortByToEdit] = useState(toyService.getDefaultSort())
 
     useEffect(() => {
-        // console.log('sortByToEdit:', sortByToEdit)
-        // console.log('filterByToEdit:', filterByToEdit)
         loadToys()
             .catch(err => {
                 console.log('err:', err)
@@ -79,9 +74,9 @@ export function ToyIndex() {
 
             <section className="filter-container">
 
-                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels}  sortBy={sortBy} onSetSortBy={onSetSortBy} />
-                    {/* <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} /> */}
-                    {/* <Link className="btn dark" to="/toy/edit">Add New Toy</Link> */}
+                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} sortBy={sortBy} onSetSortBy={onSetSortBy} />
+                {/* <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} /> */}
+                {/* <Link className="btn dark" to="/toy/edit">Add New Toy</Link> */}
             </section>
 
             <section className="list-container">

@@ -12,6 +12,7 @@ import { ToyEdit } from './pages/ToyEdit'
 import { AppHeader } from './cpms/AppHeader'
 import { NavSide } from './cpms/NavSide'
 import { CategoryList } from './cpms/CategoryList'
+import { Signup } from './pages/Signup'
 
 export function App() {
 
@@ -21,13 +22,11 @@ export function App() {
         <section className="main-layout app">
           <AppHeader />
           <NavSide />
-
           <CategoryList />
-
-
           <main>
             <Routes>
               <Route element={<HomePage />} path="/" />
+              <Route element={<Signup />} path="/signup" />
               <Route element={<ToyIndex />} path="/toy" />
               <Route element={<About />} path="/about" />
               <Route element={<Blog />} path="/blog" />

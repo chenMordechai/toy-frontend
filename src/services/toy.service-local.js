@@ -17,58 +17,56 @@ export const toyService = {
 }
 
 
-function query(filterBy = {}, sortBy = {}) {
+async function query(filterBy = {}, sortBy = {}) {
     // console.log('filterBy:', filterBy)
     // console.log('sortBy:', sortBy)
 
-    return storageService.query(STORAGE_KEY)
+    const toys = await storageService.query(STORAGE_KEY)
 
-        .then(toys => {
-            //     const toysData ={
-            //         allToysCount : toys.length,
-            //         doneToysCount : toys.filter(t=>t.isDone).length,
-            //         toysToDisplay:[],
-            //         pageCount:0
-            //     }
-            let toysToDisplay = toys.slice()
-            if (filterBy.name) {
-                const regExp = new RegExp(filterBy.name, 'i')
-                toysToDisplay = toysToDisplay.filter(t => regExp.test(t.name))
-            }
+    //     const toysData ={
+    //         allToysCount : toys.length,
+    //         doneToysCount : toys.filter(t=>t.isDone).length,
+    //         toysToDisplay:[],
+    //         pageCount:0
+    //     }
+    let toysToDisplay = toys.slice()
+    if (filterBy.name) {
+        const regExp = new RegExp(filterBy.name, 'i')
+        toysToDisplay = toysToDisplay.filter(t => regExp.test(t.name))
+    }
 
-            if (filterBy.price) {
-                toysToDisplay = toysToDisplay.filter(t => t.price <= filterBy.price)
-            }
+    if (filterBy.price) {
+        toysToDisplay = toysToDisplay.filter(t => t.price <= filterBy.price)
+    }
 
-            if (filterBy.inStock !== 'all') {
-                toysToDisplay = toysToDisplay.filter(t => t.inStock && filterBy.inStock === 'inStock'
-                    || !t.inStock && filterBy.inStock === 'notInStock')
-            }
+    if (filterBy.inStock !== 'all') {
+        toysToDisplay = toysToDisplay.filter(t => t.inStock && filterBy.inStock === 'inStock'
+            || !t.inStock && filterBy.inStock === 'notInStock')
+    }
 
-            if (filterBy.labels.length !== 0) {
-                toysToDisplay = toysToDisplay.filter(t => {
-                    return filterBy.labels.every(l => {
-                        return t.labels.includes(l)
-                    })
-                })
-            }
-
-            if (sortBy.type) {
-                if (sortBy.type === 'name') {
-                    toysToDisplay.sort(((t1, t2) => t1.name.localeCompare(t2.name) * sortBy.desc))
-                } else {
-                    toysToDisplay.sort(((t1, t2) => (t1[sortBy.type] - t2[sortBy.type]) * sortBy.desc))
-                }
-            }
-            //     const pageCount = Math.ceil(toysToDisplay.length / PAGE_SIZE)
-            //     if (filterBy.pageIdx !== undefined) {
-            //         let start = filterBy.pageIdx * PAGE_SIZE // 0 , 3 , 6 , 9
-            //         toysToDisplay = toysToDisplay.slice(start, start + PAGE_SIZE)
-            //     }
-            //     toysData.pageCount = pageCount
-            //     toysData.toysToDisplay = toysToDisplay
-            return toysToDisplay
+    if (filterBy.labels.length !== 0) {
+        toysToDisplay = toysToDisplay.filter(t => {
+            return filterBy.labels.every(l => {
+                return t.labels.includes(l)
+            })
         })
+    }
+
+    if (sortBy.type) {
+        if (sortBy.type === 'name') {
+            toysToDisplay.sort(((t1, t2) => t1.name.localeCompare(t2.name) * sortBy.desc))
+        } else {
+            toysToDisplay.sort(((t1, t2) => (t1[sortBy.type] - t2[sortBy.type]) * sortBy.desc))
+        }
+    }
+    //     const pageCount = Math.ceil(toysToDisplay.length / PAGE_SIZE)
+    //     if (filterBy.pageIdx !== undefined) {
+    //         let start = filterBy.pageIdx * PAGE_SIZE // 0 , 3 , 6 , 9
+    //         toysToDisplay = toysToDisplay.slice(start, start + PAGE_SIZE)
+    //     }
+    //     toysData.pageCount = pageCount
+    //     toysData.toysToDisplay = toysToDisplay
+    return toysToDisplay
 }
 function getById(toyId) {
     return storageService.get(STORAGE_KEY, toyId)
@@ -77,17 +75,13 @@ function remove(toyId) {
     return storageService.remove(STORAGE_KEY, toyId)
 
 }
-function save(toy) {
+async function save(toy) {
     if (toy._id) {
-        return storageService.put(STORAGE_KEY, toy)
-            .then((savedToy) => {
-                return savedToy
-            })
+        const savedToy = await storageService.put(STORAGE_KEY, toy)
+        return savedToy
     } else {
-        return storageService.post(STORAGE_KEY, toy)
-            .then((savedToy) => {
-                return savedToy
-            })
+        const savedToy = await storageService.post(STORAGE_KEY, toy)
+        return savedToy
     }
 }
 

@@ -8,6 +8,8 @@ export function AppHeader() {
         <section className="app-header">
             <NavLink to={'/'}>Home</NavLink>
             <NavLink to={'/toy'}>Shop</NavLink>
+            <NavLink to={'/signup'}>Signup</NavLink>
+
             {/* <NavLink to={'/about'}>About</NavLink> */}
             {/* <NavLink to={'/blog'}>Blog</NavLink> */}
             <UserMsg />
