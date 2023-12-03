@@ -1,6 +1,6 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import './style/main.scss'
+import './assets/style/main.scss'
 
 import { HomePage } from './pages/HomePage'
 import { About } from './pages/About'
