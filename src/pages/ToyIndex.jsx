@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { toyService } from '../services/toy.service.js'
 import { loadToys, removeToy, setFilterBy, setSortBy, setLabels } from '../store/actions/toy.actions.js'
 import { ToyList } from '../cpms/ToyList.jsx'
 import { ToyFilter } from '../cpms/ToyFilter.jsx'
-import { ToySort } from '../cpms/ToySort.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { CategoryList } from '../cpms/CategoryList.jsx'
-import logoUrl from '../assets/img/logo.png'
 
 
 export function ToyIndex() {
@@ -19,6 +15,7 @@ export function ToyIndex() {
     const { sortBy } = useSelector(storeState => storeState.toyModule)
     const { isLoading } = useSelector(storeState => storeState.toyModule)
     const labels = toyService.getLabels()
+    const { loggedinUser } = useSelector(storeState => storeState.userModule)
 
     useEffect(() => {
         try {
@@ -62,20 +59,13 @@ export function ToyIndex() {
     return (
         <section className="toy-index">
 
-            {/* <section className="category-container">
-              <CategoryList/>
-            </section> */}
-
             <section className="filter-container">
-
-                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} sortBy={sortBy} onSetSortBy={onSetSortBy} />
-                {/* <ToySort sortBy={sortBy} onSetSortBy={onSetSortBy} /> */}
-                {/* <Link className="btn dark" to="/toy/edit">Add New Toy</Link> */}
+                <ToyFilter UserIsAdmin={loggedinUser?.isAdmin} filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} sortBy={sortBy} onSetSortBy={onSetSortBy} />
             </section>
 
             <section className="list-container">
                 {isLoading && 'Loading..'}
-                {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
+                {!isLoading && <ToyList UserIsAdmin={loggedinUser?.isAdmin} toys={toys} onRemoveToy={onRemoveToy} />}
             </section>
 
 
