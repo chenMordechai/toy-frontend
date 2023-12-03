@@ -1,0 +1,10 @@
+.toy-msg-list {
+    li {
+        margin: $pad1;
+
+        span {
+            color: $clr5;
+            margin-inline-start: $pad1;
+        }
+    }
+}

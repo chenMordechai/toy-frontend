@@ -12,14 +12,14 @@ export function ToyMsgAdd({ onSaveToyMsg }) {
     function onSubmitForm(ev) {
         ev.preventDefault()
         onSaveToyMsg(MsgTxtToEdit)
+        setMsgTxtToEdit('')
     }
 
     return (
         <section className="toy-msg-add">
-            <h4>ToyMsgAdd</h4>
             <form onSubmit={onSubmitForm}>
                 <TextField id="outlined-basic" label="Text" variant="outlined" onChange={handleChange} value={MsgTxtToEdit} name="txt" type="text" />
-                <button>Save</button>
+                <button className="btn dark">Save</button>
             </form>
 
         </section>

@@ -30,12 +30,9 @@ export function toyReducer(state = initialState, action = {}) {
             return { ...state, toys: action.toys }
 
         case SET_TOY:
-            console.log('SET_TOY')
-            console.log('state:', state)
             return { ...state, currToy: action.toy }
 
         case UPDATE_TOY_MSGS:
-            console.log('state:', state)
             return { ...state, currToy: { ...state.currToy, msgs: [...state.currToy.msgs, action.msg] } }
 
         case REMOVE_TOY:

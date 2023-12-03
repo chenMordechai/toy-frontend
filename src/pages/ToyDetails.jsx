@@ -44,7 +44,8 @@ export function ToyDetails() {
             {isLoading && 'Loading...'}
             {!isLoading && toy &&
                 (<section className="toy-details">
-                    <div className="details-container">
+                    <section  className="details-container" >
+                    <div >
                         <h4>{toy.name}</h4>
                         {/* <h4>Id: {toy._id}</h4> */}
                         <h4>$ {toy.price}</h4>
@@ -58,13 +59,12 @@ export function ToyDetails() {
                         <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                         <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
                     </div>
-                    <section className="toy-msgs">
+                    </section>
+                    <section className="msgs-container">
                         <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />
-                        <h4>Msgs:</h4>
                         <ToyMsgList msgs={toy.msgs} />
                     </section>
                 </section>)}
-
         </section>
     )
 }

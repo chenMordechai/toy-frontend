@@ -5,7 +5,7 @@ export function ToyMsgList({ msgs }) {
         <section className="toy-msg-list">
             <ul>{msgs.map(m => <li
                 key={m.id}>{m.txt}
-                <span>By: {m.by.fullname}</span>
+                <span>{m.by.fullname}</span>
             </li>)}</ul>
 
         </section>

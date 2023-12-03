@@ -2,47 +2,51 @@
     position: relative;
     @include section;
 
-    @include flex(row-reverse, center, space-evenly);
-
-    @include for-mobile-layout {
-        flex-direction: column-reverse;
-        align-items: center;
-        gap: $pad2;
-    }
-
-    .details-container {
-        @include flex(column, center, center, $pad1);
-
-        text-align: center;
-        width: 40%;
-
-        @include for-mobile-layout {
-            width: 70%;
-        }
-    }
-
-    .img-container {
-        width: 40%;
-        max-width: 250px;
-        a {
-            position: absolute;
-            top: $pad2;
-            left: $pad2;
-        }
-        @include for-mobile-layout {
-            width: 70%;
-        }
-    }
+    @include flex(column, center, center, $pad2);
     h4 {
         margin: 0;
         color: $clr6;
         font-size: 1.6em;
     }
+    .details-container {
+        @include flex(row-reverse, center, space-evenly, $pad2);
 
-    ul {
+        text-align: center;
+        width: 100%;
+
         @include for-mobile-layout {
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
+        }
+        .img-container {
+            width: 40%;
+            max-width: 250px;
+            a {
+                position: absolute;
+                top: $pad2;
+                left: $pad2;
+            }
+            @include for-mobile-layout {
+                width: 70%;
+            }
+        }
+        ul {
+            @include for-mobile-layout {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+
+    .msgs-container {
+        padding: $pad2;
+        background-color: $clr1;
+        width: 80%;
+
+        form {
+            @include flex(row, center, center, $pad2);
+        }
+        ul {
+            // margin-block-start: $pad2;
         }
     }
 }
