@@ -23,6 +23,7 @@ export const toyService = {
 }
 
 async function query(filterBy = {}, sortBy = {}) {
+    console.log('filterBy', filterBy)
     filterBy = { ...filterBy, ...sortBy }
     return httpService.get(BASE_URL, filterBy)
 }
