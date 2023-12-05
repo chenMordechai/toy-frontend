@@ -6,9 +6,7 @@ import { setFilterBy } from '../store/actions/review.actions'
 
 export function UserDetails() {
     const { loggedinUser: user } = useSelector(storeState => storeState.userModule)
-    console.log('user:', user)
     const { reviews } = useSelector(storeState => storeState.reviewModule)
-    console.log('reviews:', reviews)
 
     useEffect(() => {
         try {
@@ -20,6 +18,7 @@ export function UserDetails() {
         }
     }, [])
 
+    if(!user) return ''
     return (
         <section className="userDetails">
             <h3>{user.fullname} {user.isAdmin && <span>- Admin</span>}</h3>

@@ -43,12 +43,12 @@ export async function saveReview(review) {
 }
 
 export function setFilterBy(filterBy) {
-    console.log('filterBy:', filterBy)
+    // console.log('filterBy:', filterBy)
     store.dispatch({ type: SET_REVIEW_FILTER, filterBy })
 }
 
 export function setSortBy(sortBy) {
-    console.log('sortBy:', sortBy)
+    // console.log('sortBy:', sortBy)
     store.dispatch({ type: SET_REVIEW_SORT, sortBy })
 }
 

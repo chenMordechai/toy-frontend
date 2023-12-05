@@ -4,16 +4,13 @@ import { useEffect , useState } from "react"
 
 
 export function ToyReviewList({ reviews }) {
-    console.log('reviews:', reviews)
     const [isReviewPage, setIsReviewPage] = useState(false)
 
     const params  = useParams()
-    console.log('params:', params)
     
     useEffect(() => {
         if(!params.toyId){
             setIsReviewPage(()=> true)
-            console.log('isReviewPage:', isReviewPage)
         }
     }, [])
 

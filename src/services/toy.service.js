@@ -79,7 +79,6 @@ async function queryOLD(filterBy = {}, sortBy = {}) {
 }
 
 async function getById(toyId) {
-    console.log('toyId', toyId)
     return httpService.get(BASE_URL + toyId)
 }
 

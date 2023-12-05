@@ -18,11 +18,13 @@ function query(filterBy, sortBy) {
 }
 
 async function getById(reviewId) {
+    console.log('reviewId:', reviewId)
     return httpService.get(BASE_URL + reviewId)
 }
 
 
 function save(review) {
+    console.log('review:', review)
     return httpService.post(BASE_URL, review)
 }
 
