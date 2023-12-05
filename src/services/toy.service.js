@@ -19,7 +19,7 @@ export const toyService = {
     getCategories,
     getCategoriesIcons,
     saveMsg,
-    getEmptyMsg
+    getEmptyMsg,
 }
 
 async function query(filterBy = {}, sortBy = {}) {

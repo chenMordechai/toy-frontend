@@ -2,12 +2,14 @@ import { combineReducers, compose, legacy_createStore as createStore } from "red
 // import { userService } from "../services/user.service.js"
 import { toyReducer } from "./reducers/toy.reducer.js"
 import { userReducer } from "./reducers/user.reducer.js"
+import { reviewReducer } from "./reducers/review.reducer.js"
 
 
 
 const rootReducer = combineReducers({
     toyModule: toyReducer,
-    userModule: userReducer
+    userModule: userReducer,
+    reviewModule: reviewReducer
 })
 
 

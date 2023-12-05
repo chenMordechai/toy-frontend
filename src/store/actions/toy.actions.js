@@ -1,5 +1,6 @@
 import { toyService } from "../../services/toy.service.js";
 import { ADD_TOY, REMOVE_TOY, SET_TOYS, UPDATE_TOY, SET_IS_LOADING, SET_FILTER_BY, SET_SORT_BY, SET_LABEL, SET_FILTER_CATEGORY, UPDATE_TOY_MSGS, SET_TOY } from "../reducers/toy.reducer.js";
+import { SET_REVIEW_FILTER } from "../reducers/review.reducer.js";
 import { store } from "../store.js";
 
 export async function loadToys() {
@@ -22,6 +23,8 @@ export async function loadToy(toyId) {
         store.dispatch({ type: SET_IS_LOADING, isLoading: true })
         const toy = await toyService.getById(toyId)
         store.dispatch({ type: SET_TOY, toy })
+        store.dispatch({ type: SET_REVIEW_FILTER, filterBy: { aboutToyId: toy._id } })
+        console.log('hi')
     } catch (err) {
         console.log('toy action -> Cannot load toy', err)
         throw err
@@ -74,9 +77,7 @@ export async function saveToyMsg(msg, toyId) {
     } catch (err) {
         console.log('toy action -> Cannot save toy msg', err)
         throw err
-
     }
-
 }
 
 export function setFilterBy(filterBy) {
