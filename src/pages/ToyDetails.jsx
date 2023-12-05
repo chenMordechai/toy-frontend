@@ -9,7 +9,7 @@ import { faBackward } from '@fortawesome/free-solid-svg-icons'
 
 import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
 import { loadToy, saveToyMsg } from '../store/actions/toy.actions.js'
-import { loadReviews, saveReview } from '../store/actions/review.actions.js'
+import { loadReviews, resetFilterBy, saveReview, setFilterBy } from '../store/actions/review.actions.js'
 import { ToyMsgAdd } from "../cpms/ToyMsgAdd"
 import { ToyMsgList } from "../cpms/ToyMsgList.jsx"
 import { ToyReviewAdd } from "../cpms/ToyReviewAdd"
@@ -35,6 +35,8 @@ export function ToyDetails() {
     async function init() {
         try {
             await loadToy(toyId)
+            resetFilterBy()
+            setFilterBy({ aboutToyId: toyId })
             loadReviews()
         } catch (err) {
             console.log('Had issues in toy details', err)
@@ -47,7 +49,8 @@ export function ToyDetails() {
     }
     async function onSaveReview(review) {
         review = { ...review, aboutToyId: toy._id }
-        saveReview(review)
+        await saveReview(review)
+        await loadReviews()
     }
 
     return (

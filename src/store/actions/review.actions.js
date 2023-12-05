@@ -1,6 +1,6 @@
 import { reviewService } from "../../services/review.service.js"
 
-import { ADD_REVIEW, SET_REVIEWS } from "../reducers/review.reducer.js";
+import { ADD_REVIEW, SET_REVIEWS, SET_REVIEW_FILTER, RESET_REVIEW_FILTER } from "../reducers/review.reducer.js";
 import { store } from "../store.js";
 
 
@@ -15,16 +15,39 @@ export async function loadReviews() {
         throw err
     }
 }
+export async function loadReview(reviewId) {
+    try {
+        const reviewToShow = await reviewService.getById(reviewId)
+        store.dispatch({ type: ADD_REVIEW, review: reviewToShow })
+        return reviewToShow
+    } catch (err) {
+        console.log('review action -> Cannot load review', err)
+        throw err
+    }
+}
 
 export async function saveReview(review) {
     try {
-        const reviewToSave = await reviewService.save(review)
-        store.dispatch({ type: ADD_REVIEW, review: reviewToSave })
-        return reviewToSave
-
+        const savedReview = await reviewService.save(review)
+        // console.log('reviewToSave', reviewToSave)
+        // store.dispatch({ type: ADD_REVIEW, review: reviewToSave })
+        // return reviewToSave
+        // loadReviews() // because we want to get the big review (after aggregate)
+        const reviewToShow = loadReview(savedReview._id) // because we want to get the big review (after aggregate)
+        return reviewToShow
     } catch (err) {
         console.log('review action -> Cannot save review review', err)
         throw err
 
     }
+}
+
+export function setFilterBy(filterBy) {
+    console.log('filterBy:', filterBy)
+    store.dispatch({ type: SET_REVIEW_FILTER, filterBy })
+}
+
+export function resetFilterBy() {
+    store.dispatch({ type: RESET_REVIEW_FILTER })
+
 }

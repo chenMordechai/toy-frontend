@@ -4,6 +4,7 @@ export const SET_REVIEWS = 'SET_REVIEWS'
 export const ADD_REVIEW = 'ADD_REVIEW'
 export const REMOVE_REVIEW = 'REMOVE_REVIEW'
 export const SET_REVIEW_FILTER = 'SET_REVIEW_FILTER'
+export const RESET_REVIEW_FILTER = 'RESET_REVIEW_FILTER'
 
 
 const initialState = {
@@ -28,6 +29,9 @@ export function reviewReducer(state = initialState, action = {}) {
 
         case SET_REVIEW_FILTER:
             return { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
+
+        case RESET_REVIEW_FILTER:
+            return { ...state, filterBy: reviewService.getDefaultFilter() }
 
         default:
             return state;

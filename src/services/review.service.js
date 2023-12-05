@@ -4,7 +4,7 @@ const BASE_URL = 'review/'
 
 export const reviewService = {
     query,
-    // getById,
+    getById,
     save,
     // remove,
     getEmptyReview,
@@ -15,6 +15,11 @@ function query(filterBy, sortBy) {
     filterBy = { ...filterBy, ...sortBy }
     return httpService.get(BASE_URL, filterBy)
 }
+
+async function getById(reviewId) {
+    return httpService.get(BASE_URL + reviewId)
+}
+
 
 function save(review) {
     return httpService.post(BASE_URL, review)

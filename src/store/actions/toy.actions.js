@@ -23,7 +23,6 @@ export async function loadToy(toyId) {
         store.dispatch({ type: SET_IS_LOADING, isLoading: true })
         const toy = await toyService.getById(toyId)
         store.dispatch({ type: SET_TOY, toy })
-        store.dispatch({ type: SET_REVIEW_FILTER, filterBy: { aboutToyId: toy._id } })
         console.log('hi')
     } catch (err) {
         console.log('toy action -> Cannot load toy', err)
