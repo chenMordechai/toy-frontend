@@ -14,6 +14,8 @@ import { AppHeader } from './cpms/AppHeader'
 import { NavSide } from './cpms/NavSide'
 import { CategoryList } from './cpms/CategoryList'
 import { Signup } from './pages/Signup'
+import { ReviewExplore } from './pages/ReviewExplore'
+import { UserDetails } from './pages/UserDetails'
 
 export function App() {
 
@@ -34,6 +36,8 @@ export function App() {
               <Route element={<ToyDetails />} path="/toy/:toyId" />
               <Route element={<ToyEdit />} path="/toy/edit/" />
               <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
+              <Route element={<UserDetails />} path="/user/:userId" />
+              <Route element={<ReviewExplore />} path="/review" />
               {/* <Route element={<h1 >Not Found..</h1>} path="*" /> */}
             </Routes>
           </main>

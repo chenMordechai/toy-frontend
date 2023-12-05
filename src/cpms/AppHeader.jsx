@@ -24,16 +24,18 @@ export function AppHeader() {
             {/* <section className="link-container"> */}
             <NavLink to={'/'}>Home</NavLink>
             <NavLink to={'/toy'}>Shop</NavLink>
+            <NavLink to={'/review'}>Reviews</NavLink>
             {!user && <NavLink to={'/signup'}>Signup</NavLink>}
 
             {/* <NavLink to={'/about'}>About</NavLink> */}
             {/* <NavLink to={'/blog'}>Blog</NavLink> */}
 
             {user && <section className="user-info">
+                <NavLink to={'/user/' + user._id}>Profile</NavLink>
                 {/* <NavLink to={'/signup'}>Logout</NavLink> */}
-                <button onClick={onLogout}>Logout</button>
                 <span>{user.fullname}</span>
                 {user.isAdmin && <span>Admin</span>}
+                <button onClick={onLogout}>Logout</button>
             </section>}
             <UserMsg />
         </section>
