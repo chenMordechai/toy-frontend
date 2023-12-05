@@ -1,6 +1,6 @@
 import { reviewService } from "../../services/review.service.js"
 
-import { ADD_REVIEW, SET_REVIEWS, SET_REVIEW_FILTER, RESET_REVIEW_FILTER } from "../reducers/review.reducer.js";
+import { ADD_REVIEW, SET_REVIEWS, SET_REVIEW_FILTER, RESET_REVIEW_FILTER,SET_REVIEW_SORT } from "../reducers/review.reducer.js";
 import { store } from "../store.js";
 
 
@@ -45,6 +45,11 @@ export async function saveReview(review) {
 export function setFilterBy(filterBy) {
     console.log('filterBy:', filterBy)
     store.dispatch({ type: SET_REVIEW_FILTER, filterBy })
+}
+
+export function setSortBy(sortBy) {
+    console.log('sortBy:', sortBy)
+    store.dispatch({ type: SET_REVIEW_SORT, sortBy })
 }
 
 export function resetFilterBy() {

@@ -8,7 +8,8 @@ export const reviewService = {
     save,
     // remove,
     getEmptyReview,
-    getDefaultFilter
+    getDefaultFilter,
+    getDefaultSort
 }
 
 function query(filterBy, sortBy) {
@@ -36,5 +37,11 @@ function getDefaultFilter() {
         txt: '',
         aboutToyId: '',
         byUserId: ''
+    }
+}
+function getDefaultSort() {
+    return {
+        type:'',
+        desc:1
     }
 }

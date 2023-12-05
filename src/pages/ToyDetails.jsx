@@ -50,7 +50,7 @@ export function ToyDetails() {
     async function onSaveReview(review) {
         review = { ...review, aboutToyId: toy._id }
         await saveReview(review)
-        await loadReviews()
+
     }
 
     return (

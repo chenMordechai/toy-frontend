@@ -5,12 +5,13 @@ export const ADD_REVIEW = 'ADD_REVIEW'
 export const REMOVE_REVIEW = 'REMOVE_REVIEW'
 export const SET_REVIEW_FILTER = 'SET_REVIEW_FILTER'
 export const RESET_REVIEW_FILTER = 'RESET_REVIEW_FILTER'
+export const SET_REVIEW_SORT = 'SET_REVIEW_SORT'
 
 
 const initialState = {
     reviews: [],
     filterBy: reviewService.getDefaultFilter(),
-    // sortBy: reviewService.getDefaultSort(),
+    sortBy: reviewService.getDefaultSort(),
 }
 
 export function reviewReducer(state = initialState, action = {}) {
@@ -29,10 +30,12 @@ export function reviewReducer(state = initialState, action = {}) {
 
         case SET_REVIEW_FILTER:
             return { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
-
-        case RESET_REVIEW_FILTER:
-            return { ...state, filterBy: reviewService.getDefaultFilter() }
-
+            
+            case RESET_REVIEW_FILTER:
+                return { ...state, filterBy: reviewService.getDefaultFilter() }
+                
+                case SET_REVIEW_SORT:
+                    return { ...state, sortBy: { ...state.sortBy, ...action.sortBy } }
         default:
             return state;
     }
