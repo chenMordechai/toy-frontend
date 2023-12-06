@@ -24,6 +24,7 @@ export function ToyDetails() {
     // const [toy, setToy] = useState(null)
     const { currToy: toy } = useSelector(storeState => storeState.toyModule)
     const { reviews } = useSelector(storeState => storeState.reviewModule)
+    const { loggedinUser } = useSelector(storeState => storeState.userModule)
 
     const { toyId } = useParams()
     const navigate = useNavigate()
@@ -103,13 +104,13 @@ export function ToyDetails() {
 
                     <section >
                         <h3>Reviews:</h3>
-                        <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} />
-                        <ToyReviewAdd onSaveReview={onSaveReview} />
+                        <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
+                        {loggedinUser &&<ToyReviewAdd onSaveReview={onSaveReview} />}
                     </section>
                     <section>
                         <h3>Messages:</h3>
-                        <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} />
-                        <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />
+                        <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} loggedinUser={loggedinUser} />
+                       {loggedinUser&& <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />}
                     </section>
                     </section>
                 </section>)}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 
 
-export function ToyReviewList({ reviews, onRemoveReview }) {
+export function ToyReviewList({ reviews, onRemoveReview , loggedinUser }) {
     const [isReviewPage, setIsReviewPage] = useState(false)
 
     const params = useParams()
@@ -18,9 +18,9 @@ export function ToyReviewList({ reviews, onRemoveReview }) {
         <section className="toy-review-list">
             <ul>{reviews.map(r => <li
                 key={r._id}>
-                <button className="btn" onClick={() => {
+               {loggedinUser?.isAdmin && <button className="btn" onClick={() => {
                     onRemoveReview(r._id)
-                }}>x</button>
+                }}>x</button>}
                 {r.txt}
                 <span>{r.byUser.fullname}</span>
                 <span>{isReviewPage && r.aboutToy.name}</span>

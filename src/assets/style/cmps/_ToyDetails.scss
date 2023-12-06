@@ -43,17 +43,7 @@
             flex-direction: column;
         }
         section {
-            padding: $pad2;
-            background-color: $clr1;
-
-            li {
-                margin: $pad1;
-
-                span {
-                    color: $clr5;
-                    margin-inline-start: $pad1;
-                }
-            }
+            @include section-with-ul;
 
             form {
                 @include flex(row, center, center, $pad2);

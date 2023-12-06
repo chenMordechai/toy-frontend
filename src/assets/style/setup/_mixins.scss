@@ -81,6 +81,20 @@
     padding: $pad3;
 }
 
+@mixin section-with-ul {
+    padding: $pad2;
+    background-color: $clr1;
+
+    li {
+        margin: $pad1;
+
+        span {
+            color: $clr5;
+            margin-inline-start: $pad1;
+        }
+    }
+}
+
 // Buttons
 
 @mixin btn($type: regular) {
