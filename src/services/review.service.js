@@ -6,7 +6,7 @@ export const reviewService = {
     query,
     getById,
     save,
-    // remove,
+    remove,
     getEmptyReview,
     getDefaultFilter,
     getDefaultSort
@@ -22,10 +22,14 @@ async function getById(reviewId) {
     return httpService.get(BASE_URL + reviewId)
 }
 
-
 function save(review) {
     console.log('review:', review)
     return httpService.post(BASE_URL, review)
+}
+
+function remove(reviewId) {
+    console.log('reviewId:', reviewId)
+    return httpService.delete(BASE_URL + reviewId)
 }
 
 function getEmptyReview() {
@@ -43,7 +47,7 @@ function getDefaultFilter() {
 }
 function getDefaultSort() {
     return {
-        type:'',
-        desc:1
+        type: '',
+        desc: 1
     }
 }

@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBackward } from '@fortawesome/free-solid-svg-icons'
 
 import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
-import { loadToy, saveToyMsg } from '../store/actions/toy.actions.js'
-import { loadReviews, resetFilterBy, saveReview, setFilterBy } from '../store/actions/review.actions.js'
+import { loadToy, saveToyMsg, removeToyMsg } from '../store/actions/toy.actions.js'
+import { loadReviews, resetFilterBy, saveReview, setFilterBy, removeReview } from '../store/actions/review.actions.js'
 import { ToyMsgAdd } from "../cpms/ToyMsgAdd"
 import { ToyMsgList } from "../cpms/ToyMsgList.jsx"
 import { ToyReviewAdd } from "../cpms/ToyReviewAdd"
@@ -45,12 +45,37 @@ export function ToyDetails() {
     }
 
     async function onSaveToyMsg(msg) {
-        saveToyMsg(msg, toy._id)
+        try {
+            await saveToyMsg(msg, toy._id)
+        } catch (err) {
+            console.log('Had issues in save msg', err)
+        }
     }
+
+    async function onRemoveToyMsg(msgId) {
+        try {
+            await removeToyMsg(msgId, toy._id)
+        } catch (err) {
+            console.log('Had issues in remove msg', err)
+        }
+    }
+
     async function onSaveReview(review) {
         review = { ...review, aboutToyId: toy._id }
-        await saveReview(review)
+        try {
+            await saveReview(review)
+        } catch (err) {
+            console.log('Had issues in save review', err)
+        }
+    }
 
+    async function onRemoveReview(reviewId) {
+        console.log('onRemoveReview', reviewId)
+        try {
+            await removeReview(reviewId)
+        } catch (err) {
+            console.log('Had issues in remove review', err)
+        }
     }
 
     return (
@@ -76,13 +101,13 @@ export function ToyDetails() {
                     </section>
                     <section className="reviews-container">
                         <h3>Reviews:</h3>
+                        <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} />
                         <ToyReviewAdd onSaveReview={onSaveReview} />
-                        <ToyReviewList reviews={reviews} />
                     </section>
                     <section className="msgs-container">
                         <h3>Messages:</h3>
+                        <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} />
                         <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />
-                        <ToyMsgList msgs={toy.msgs} />
                     </section>
                 </section>)}
         </section>

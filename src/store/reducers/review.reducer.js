@@ -30,12 +30,12 @@ export function reviewReducer(state = initialState, action = {}) {
 
         case SET_REVIEW_FILTER:
             return { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
-            
-            case RESET_REVIEW_FILTER:
-                return { ...state, filterBy: reviewService.getDefaultFilter() }
-                
-                case SET_REVIEW_SORT:
-                    return { ...state, sortBy: { ...state.sortBy, ...action.sortBy } }
+
+        case RESET_REVIEW_FILTER:
+            return { ...state, filterBy: reviewService.getDefaultFilter() }
+
+        case SET_REVIEW_SORT:
+            return { ...state, sortBy: { ...state.sortBy, ...action.sortBy } }
         default:
             return state;
     }

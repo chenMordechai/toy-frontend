@@ -19,6 +19,7 @@ export const toyService = {
     getCategories,
     getCategoriesIcons,
     saveMsg,
+    removeMsg,
     getEmptyMsg,
 }
 
@@ -97,6 +98,10 @@ async function save(toy) {
 
 async function saveMsg(msg, toyId) {
     return httpService.post(BASE_URL + toyId + '/msg', msg)
+}
+async function removeMsg(msgId, toyId) {
+    console.log(BASE_URL + toyId + '/msg',)
+    return httpService.delete(BASE_URL + toyId + '/msg/' + msgId, msgId)
 }
 
 function getEmptyToy() {

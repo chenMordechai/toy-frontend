@@ -12,6 +12,7 @@ export const SET_LABEL = 'SET_LABEL'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const SET_FILTER_CATEGORY = 'SET_FILTER_CATEGORY'
 export const UPDATE_TOY_MSGS = 'UPDATE_TOY_MSGS'
+export const REMOVE_TOY_MSGS = 'REMOVE_TOY_MSGS'
 
 
 const initialState = {
@@ -34,6 +35,9 @@ export function toyReducer(state = initialState, action = {}) {
 
         case UPDATE_TOY_MSGS:
             return { ...state, currToy: { ...state.currToy, msgs: [...state.currToy.msgs, action.msg] } }
+
+        case REMOVE_TOY_MSGS:
+            return { ...state, currToy: { ...state.currToy, msgs: state.currToy.msgs.filter(m => m.id !== action.msgId) } }
 
         case REMOVE_TOY:
             toys = state.toys.filter(toy => toy._id !== action.toyId)

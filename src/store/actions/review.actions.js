@@ -1,6 +1,6 @@
 import { reviewService } from "../../services/review.service.js"
 
-import { ADD_REVIEW, SET_REVIEWS, SET_REVIEW_FILTER, RESET_REVIEW_FILTER,SET_REVIEW_SORT } from "../reducers/review.reducer.js";
+import { ADD_REVIEW, SET_REVIEWS, SET_REVIEW_FILTER, RESET_REVIEW_FILTER, SET_REVIEW_SORT, REMOVE_REVIEW } from "../reducers/review.reducer.js";
 import { store } from "../store.js";
 
 
@@ -15,6 +15,7 @@ export async function loadReviews() {
         throw err
     }
 }
+
 export async function loadReview(reviewId) {
     try {
         const reviewToShow = await reviewService.getById(reviewId)
@@ -35,6 +36,17 @@ export async function saveReview(review) {
         // loadReviews() // because we want to get the big review (after aggregate)
         const reviewToShow = loadReview(savedReview._id) // because we want to get the big review (after aggregate)
         return reviewToShow
+    } catch (err) {
+        console.log('review action -> Cannot save review review', err)
+        throw err
+
+    }
+}
+
+export async function removeReview(reviewId) {
+    try {
+        await reviewService.remove(reviewId)
+        store.dispatch({ type: REMOVE_REVIEW, reviewId })
     } catch (err) {
         console.log('review action -> Cannot save review review', err)
         throw err
