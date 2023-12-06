@@ -99,15 +99,18 @@ export function ToyDetails() {
                             <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
                         </div>
                     </section>
-                    <section className="reviews-container">
+                    <section className="msgs-container">
+
+                    <section >
                         <h3>Reviews:</h3>
                         <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} />
                         <ToyReviewAdd onSaveReview={onSaveReview} />
                     </section>
-                    <section className="msgs-container">
+                    <section>
                         <h3>Messages:</h3>
                         <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} />
                         <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />
+                    </section>
                     </section>
                 </section>)}
         </section>

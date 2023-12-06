@@ -66,9 +66,9 @@ export async function saveToy(toy) {
     }
 }
 
-export async function saveToyMsg(msgId, toyId) {
+export async function saveToyMsg(msg, toyId) {
     try {
-        const msgToSave = await toyService.removeMsg(msgId, toyId)
+        const msgToSave = await toyService.saveMsg(msg, toyId)
         store.dispatch({ type: UPDATE_TOY_MSGS, msg: msgToSave })
         return msgToSave
 
@@ -94,6 +94,7 @@ export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
 
 }
+
 export function setCategory(filterBy) {
     store.dispatch({ type: SET_FILTER_CATEGORY, filterBy })
 

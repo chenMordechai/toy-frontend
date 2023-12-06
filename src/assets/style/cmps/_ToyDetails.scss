@@ -38,15 +38,26 @@
     }
 
     .msgs-container {
-        padding: $pad2;
-        background-color: $clr1;
-        width: 80%;
-
-        form {
-            @include flex(row, center, center, $pad2);
+        @include flex(row, start, center, $pad2);
+        @include for-mobile-layout {
+            flex-direction: column;
         }
-        ul {
-            // margin-block-start: $pad2;
+        section {
+            padding: $pad2;
+            background-color: $clr1;
+
+            li {
+                margin: $pad1;
+
+                span {
+                    color: $clr5;
+                    margin-inline-start: $pad1;
+                }
+            }
+
+            form {
+                @include flex(row, center, center, $pad2);
+            }
         }
     }
 }

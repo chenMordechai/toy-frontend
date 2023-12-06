@@ -99,8 +99,8 @@ async function save(toy) {
 async function saveMsg(msg, toyId) {
     return httpService.post(BASE_URL + toyId + '/msg', msg)
 }
+
 async function removeMsg(msgId, toyId) {
-    console.log(BASE_URL + toyId + '/msg',)
     return httpService.delete(BASE_URL + toyId + '/msg/' + msgId, msgId)
 }
 
@@ -122,6 +122,7 @@ function getEmptyMsg() {
 function getDefaultFilter() {
     return { name: '', inStock: 'all', labels: [], price: '' }
 }
+
 function getDefaultSort() {
     return { type: '', desc: 1 }
 }
@@ -134,6 +135,7 @@ function getLabels() {
 function getCategories() {
     return ['All', 'In Stock', ...getLabels()]
 }
+
 function getCategoriesIcons() {
     return ['faPersonBiking', 'faCubesStacked', 'faPuzzlePiece', 'faBorderAll']
 }
