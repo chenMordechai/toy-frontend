@@ -99,7 +99,7 @@ export function ToyDetails() {
                     <section className="icons-container">
                  <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                 <button className="btn"> <FontAwesomeIcon onClick={onOpenChat} icon={faComments} /></button>
-              {  isChatOpen && <ChatRoom onCloseChat={onCloseChat} />}
+              {  isChatOpen && <ChatRoom onCloseChat={onCloseChat} topic={toy._id} />}
                     </section>
                     <section className="details-container" >
                         <div >

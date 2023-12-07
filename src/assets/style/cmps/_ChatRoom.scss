@@ -1,28 +1,45 @@
 .chat-room {
     position: fixed;
-    bottom: 79px;
+    bottom: 0px;
+    @include for-mobile-layout {
+        bottom: 79px;
+    }
     right: 0;
     background-color: $clr1;
     border: 2px solid black;
     height: 300px;
     width: 300px;
     z-index: 10;
+    overflow-y: auto;
 
     button {
-        float: right;
+        position: absolute;
     }
 
     form {
-        background-color: $clr2;
+        background-color: $clr3;
         @include flex(row, center, center, $pad2);
         padding: $pad2;
-        position: absolute;
+        position: sticky;
         bottom: 0;
         width: 100%;
 
         button.btn {
             font-size: 0.8em;
             border: 2px solid $clr6;
+            position: static;
+        }
+    }
+
+    ul {
+        padding: $pad1;
+        @include flex(column, start, start);
+        // li:nth-child(even) {
+        //     background-color: $clr2;
+        // }
+        min-height: calc(100% - 55px);
+        li.user {
+            align-self: end;
         }
     }
 }
