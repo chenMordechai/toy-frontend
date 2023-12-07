@@ -1,0 +1,22 @@
+.signup {
+    position: absolute;
+    background-color: $clr1;
+    top: 150px;
+    border: 2px solid black;
+    text-align: center;
+    padding: $pad3;
+    h2 {
+        margin-bottom: $pad2;
+        font-size: 1.8em;
+    }
+
+    .login-page {
+        form {
+            @include flex(column, stretch, center, $pad2);
+
+            button {
+                justify-content: center;
+            }
+        }
+    }
+}

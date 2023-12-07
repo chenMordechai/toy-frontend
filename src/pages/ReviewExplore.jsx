@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ToyReviewList } from "../cpms/ToyReviewList.jsx"
 import { ToyReviewFilter } from "../cpms/ToyReviewFilter.jsx"
-import { loadReviews, resetFilterBy, setFilterBy,setSortBy,removeReview } from '../store/actions/review.actions.js'
+import { loadReviews, resetFilterBy, setFilterBy, setSortBy, removeReview } from '../store/actions/review.actions.js'
 
 
 
@@ -18,11 +18,11 @@ export function ReviewExplore() {
     }, [])
 
     useEffect(() => {
-            loadReviews()
-    }, [filterBy,sortBy])
+        loadReviews()
+    }, [filterBy, sortBy])
 
     function onSetFilterBy(ev) {
-        let { name, value} = ev.target
+        let { name, value } = ev.target
         setFilterBy({ [name]: value })
     }
 
@@ -32,7 +32,7 @@ export function ReviewExplore() {
         setSortBy({ [name]: value })
     }
 
-    
+
     async function onRemoveReview(reviewId) {
         console.log('onRemoveReview', reviewId)
         try {
@@ -41,15 +41,14 @@ export function ReviewExplore() {
             console.log('Had issues in remove review', err)
         }
     }
-   
+
     return (
         <section className="review-explore">
-            <h2>Review Explore</h2>
             <section className="filter-container">
-                        <h3>Reviews:</h3>
-                        <ToyReviewFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} sortBy={sortBy} onSetSortBy={onSetSortBy}/>
-                        <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
-                    </section>
+                <h3>Reviews:</h3>
+                <ToyReviewFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} sortBy={sortBy} onSetSortBy={onSetSortBy} />
+                <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
+            </section>
         </section>
     )
 }

@@ -6,7 +6,7 @@ import { SET_USER } from '../store/reducers/user.reducer.js'
 import { logout } from '../store/actions/user.actions.js'
 
 
-export function Signup() {
+export function Signup({ onCloseSignup }) {
 
     const dispatch = useDispatch()
     // get from storeState
@@ -37,7 +37,7 @@ export function Signup() {
             </section>}
 
             {!user && <section className="user-info">
-                <LoginSignup onSetUser={onSetUser} />
+                <LoginSignup onSetUser={onSetUser} onCloseSignup={onCloseSignup} />
             </section>}
         </section>
     )

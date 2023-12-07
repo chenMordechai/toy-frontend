@@ -1,3 +1,4 @@
+import TextField from '@mui/material/TextField';
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
@@ -13,7 +14,7 @@ function getEmptyCredentials() {
     }
 }
 
-export function LoginSignup({ onSetUser }) {
+export function LoginSignup({ onSetUser, onCloseSignup }) {
 
     const [credentials, setCredentials] = useState(getEmptyCredentials())
     const [isSignupState, setIsSignupState] = useState(false)
@@ -25,6 +26,7 @@ export function LoginSignup({ onSetUser }) {
     }
 
     async function onSubmit(ev) {
+        onCloseSignup()
         ev.preventDefault()
 
         if (isSignupState) {
@@ -55,42 +57,18 @@ export function LoginSignup({ onSetUser }) {
         <div className="login-page">
 
             <form className="login-form" onSubmit={onSubmit}>
-                <input
-                    type="text"
-                    name="username"
-                    value={username}
-                    placeholder="Username"
-                    onChange={handleCredentialsChange}
-                    required
-                    autoFocus
-                />
+                <TextField id="outlined-basic" label="User Name" variant="outlined" onChange={handleCredentialsChange} value={username} name="username" type="text" />
 
-                <input
-                    type="password"
-                    name="password"
-                    value={password}
-                    placeholder="Password"
-                    onChange={handleCredentialsChange}
-                    required
-                />
+                <TextField id="outlined-basic" label="Password" variant="outlined" onChange={handleCredentialsChange} value={password} name="password" type="text" />
 
-                {isSignupState && <input
-                    type="text"
-                    name="fullname"
-                    value={fullname}
-                    placeholder="Full name"
-                    onChange={handleCredentialsChange}
-                    required
-                />}
+                {isSignupState && <TextField id="outlined-basic" label="Full Name" variant="outlined" onChange={handleCredentialsChange} value={fullname} name="fullname" type="text" />}
 
-                <button>{isSignupState ? 'Signup' : 'Login'}</button>
-            </form>
-
-            <div className="btns">
-                <a onClick={onToggleSignupState}>
+                <button className="btn dark" >{isSignupState ? 'Signup' : 'Login'}</button>
+                <a href="#" onClick={onToggleSignupState}>
                     {isSignupState ? 'Already a member? Login' : 'New user? Signup here'}
                 </a >
-            </div>
+            </form>
+
         </div >
     )
 }
