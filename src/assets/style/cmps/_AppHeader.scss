@@ -3,17 +3,24 @@
   height: 70px;
   width: 100%;
   background-color: $clr3;
-
-  @include flex(row, center, center, $pad1);
-
+  padding: $pad3;
+  @include flex(row, center, space-between, $pad1);
   position: sticky;
   top: 0;
   z-index: 2;
+
+  .link-container {
+    @include flex(row, center, space-between, $pad1);
+  }
 
   .user-info {
     @include flex(row, center, center, $pad1);
     span {
       color: $clr6;
+    }
+    a {
+      font-size: 1em;
+      color: $clr7;
     }
   }
 }

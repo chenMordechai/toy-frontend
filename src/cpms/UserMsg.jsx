@@ -23,7 +23,7 @@ export function UserMsg() {
         setMsg(null)
     }
 
-    if (!msg) return <span></span>
+    if (!msg) return ''
     return (
         <section className={`user-msg ${msg.type}`}>
             <button onClick={closeMsg}>x</button>

@@ -2,6 +2,8 @@
     position: absolute;
     background-color: $clr1;
     top: 150px;
+    width: 300px;
+    left: calc(50% - 150px);
     border: 2px solid black;
     text-align: center;
     padding: $pad3;
