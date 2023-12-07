@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { toyService } from '../services/toy.service.js'
 import { loadToys, removeToy, setFilterBy, setSortBy, setLabels } from '../store/actions/toy.actions.js'
+import { ADD_TOY ,REMOVE_TOY } from '../store/reducers/toy.reducer.js'
 import { ToyList } from '../cpms/ToyList.jsx'
 import { ToyFilter } from '../cpms/ToyFilter.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { SOCKET_EVENT_TOY_ADDED, SOCKET_EVENT_TOY_REMOVED, socketService } from '../services/socket.service.js'
 
 
 export function ToyIndex() {
@@ -14,10 +16,23 @@ export function ToyIndex() {
     const { isLoading } = useSelector(storeState => storeState.toyModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const labels = toyService.getLabels()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         try {
             loadToys()
+            socketService.on(SOCKET_EVENT_TOY_ADDED, toy => {
+                dispatch({ type: ADD_TOY, toy })
+            })
+    
+            socketService.on(SOCKET_EVENT_TOY_REMOVED, toyId => {
+                dispatch({ type: REMOVE_TOY, toyId })
+            })
+    
+            return () => {
+                socketService.off(SOCKET_EVENT_TOY_ADDED)
+                socketService.off(SOCKET_EVENT_TOY_REMOVED)
+            }
         } catch (err) {
             console.log('err:', err)
         }

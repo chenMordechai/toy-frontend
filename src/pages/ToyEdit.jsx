@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
 import { utilService } from "../services/util.service"
-import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
+import { SET_IS_LOADING,UPDATE_TOY } from "../store/reducers/toy.reducer";
 import { saveToy } from '../store/actions/toy.actions.js'
 import { Label } from "../cpms/Label.jsx";
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { MultiSelectMu } from '../cpms/MultiSelectMu.jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBackward } from '@fortawesome/free-solid-svg-icons'
+import { SOCKET_EVENT_TOY_UPDATE,socketService} from '../services/socket.service.js'
 
 export function ToyEdit() {
 
@@ -24,6 +25,9 @@ export function ToyEdit() {
 
     useEffect(() => {
         if (toyId) loadToy()
+        socketService.on(SOCKET_EVENT_TOY_UPDATE, toy => {
+            dispatch({ type: UPDATE_TOY, toy })
+        })
 
     }, [toyId])
 

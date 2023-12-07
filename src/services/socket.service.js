@@ -9,8 +9,9 @@ export const SOCKET_EMIT_SET_TOPIC = 'chat-set-topic'
 export const SOCKET_EMIT_USER_WATCH = 'user-watch'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 
-// export const SOCKET_EVENT_CAR_ADDED = 'car-added'
-// export const SOCKET_EVENT_CAR_REMOVED = 'car-removed'
+export const SOCKET_EVENT_TOY_UPDATE = 'toy-updated'
+export const SOCKET_EVENT_TOY_ADDED = 'toy-added'
+export const SOCKET_EVENT_TOY_REMOVED = 'toy-removed'
 
 // export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
 // export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
