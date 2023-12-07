@@ -1,20 +1,15 @@
-
 import { useState } from 'react'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
 import { CategoryPreview } from './CategoryPreview.jsx'
 import { toyService } from '../services/toy.service.js'
 import { setCategory } from '../store/actions/toy.actions.js'
-
-import { useParams , useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 export function CategoryList() {
     const [isFullCatgory, setisFullCatgory] = useState(false)
     const categories = toyService.getCategories()
-    const categoriesIcons = toyService.getCategoriesIcons()
 
     const navigate = useNavigate()
 
@@ -25,11 +20,11 @@ export function CategoryList() {
         } else if (category === 'In Stock') {
             filterBy = { inStock: 'inStock' }
         } else {
-            filterBy ={ labels: [category] }
+            filterBy = { labels: [category] }
         }
         setCategory(filterBy)
-            navigate('/toy')
-        
+        navigate('/toy')
+
     }
     function toggleCategory() {
         setisFullCatgory(prev => !prev)

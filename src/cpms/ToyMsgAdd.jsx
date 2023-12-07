@@ -1,11 +1,9 @@
 import TextField from '@mui/material/TextField';
 import { useState } from "react"
-
 import { toyService } from "../services/toy.service"
 
-
 export function ToyMsgAdd({ onSaveToyMsg }) {
-    const [MsgTxtToEdit, setMsgTxtToEdit] = useState(toyService.getEmptyMsg())
+    const [msgTxtToEdit, setMsgTxtToEdit] = useState(toyService.getEmptyMsg())
 
     function handleChange(ev) {
         setMsgTxtToEdit({txt:ev.target.value})
@@ -13,14 +11,14 @@ export function ToyMsgAdd({ onSaveToyMsg }) {
 
     function onSubmitForm(ev) {
         ev.preventDefault()
-        onSaveToyMsg(MsgTxtToEdit)
+        onSaveToyMsg(msgTxtToEdit)
         setMsgTxtToEdit(toyService.getEmptyMsg())
     }
 
     return (
         <section className="toy-msg-add">
             <form onSubmit={onSubmitForm}>
-                <TextField id="outlined-basic" label="Text" variant="outlined" onChange={handleChange} value={MsgTxtToEdit.txt} name="txt" type="text" />
+                <TextField id="outlined-basic" label="Text" variant="outlined" onChange={handleChange} value={msgTxtToEdit.txt} name="txt" type="text" />
                 <button className="btn dark">Save</button>
             </form>
 

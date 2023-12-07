@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-
 import { ToyPreview } from "./ToyPreview"
 
 export function ToyList({ toys, onRemoveToy, UserIsAdmin }) {

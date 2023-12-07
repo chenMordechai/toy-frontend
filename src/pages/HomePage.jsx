@@ -1,5 +1,3 @@
-
-
 import { Link } from 'react-router-dom'
 import logoUrl from '../assets/img/logo.png'
 
@@ -9,7 +7,6 @@ export function HomePage() {
 
             <div>
                 <h3>Find your best Toys for yor Children</h3>
-                {/* <button className="btn dark" onClick={onToggleFilter}>Get Start</button> */}
                 <Link className="btn dark" to="/toy">Get Start</Link>
             </div>
             <img src={logoUrl} />

@@ -1,7 +1,6 @@
 
 
 export function Label({ labels, label, idx, handleLabelChange }) {
-
     const isChecked = labels.includes(label)
     return (
         <li>

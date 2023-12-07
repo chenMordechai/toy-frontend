@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-
 import { toyService } from '../services/toy.service.js'
 import { loadToys, removeToy, setFilterBy, setSortBy, setLabels } from '../store/actions/toy.actions.js'
 import { ToyList } from '../cpms/ToyList.jsx'
@@ -9,13 +8,12 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 
 export function ToyIndex() {
-
     const { toys } = useSelector(storeState => storeState.toyModule)
     const { filterBy } = useSelector(storeState => storeState.toyModule)
     const { sortBy } = useSelector(storeState => storeState.toyModule)
     const { isLoading } = useSelector(storeState => storeState.toyModule)
-    const labels = toyService.getLabels()
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    const labels = toyService.getLabels()
 
     useEffect(() => {
         try {
@@ -29,7 +27,6 @@ export function ToyIndex() {
         try {
             await removeToy(toyId)
             showSuccessMsg('Remove Toy: ' + toyId)
-
         } catch (err) {
             console.log('err:', err)
             showErrorMsg('Cannot Remove Toy')
@@ -48,7 +45,6 @@ export function ToyIndex() {
         if (type === 'checkbox') value = (checked) ? -1 : 1
         setSortBy({ [name]: value })
     }
-
 
     function handleLabelChange(ev) {
         let labels = ev.target.value

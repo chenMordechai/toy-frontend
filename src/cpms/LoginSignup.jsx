@@ -1,22 +1,13 @@
 import TextField from '@mui/material/TextField';
-
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-
 import { login, signup } from '../store/actions/user.actions.js'
+import { useState } from 'react'
+import { userService } from '../services/user.service.js';
 
-import { useState, useEffect } from 'react'
 
-function getEmptyCredentials() {
-    return {
-        fullname: '',
-        username: 'chen',
-        password: '123',
-    }
-}
+export function LoginSignup({ onCloseSignup }) {
 
-export function LoginSignup({ onSetUser, onCloseSignup }) {
-
-    const [credentials, setCredentials] = useState(getEmptyCredentials())
+    const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
     const [isSignupState, setIsSignupState] = useState(false)
 
     function handleCredentialsChange(ev) {
@@ -58,9 +49,7 @@ export function LoginSignup({ onSetUser, onCloseSignup }) {
 
             <form className="login-form" onSubmit={onSubmit}>
                 <TextField id="outlined-basic" label="User Name" variant="outlined" onChange={handleCredentialsChange} value={username} name="username" type="text" />
-
                 <TextField id="outlined-basic" label="Password" variant="outlined" onChange={handleCredentialsChange} value={password} name="password" type="text" />
-
                 {isSignupState && <TextField id="outlined-basic" label="Full Name" variant="outlined" onChange={handleCredentialsChange} value={fullname} name="fullname" type="text" />}
 
                 <button className="btn dark" >{isSignupState ? 'Signup' : 'Login'}</button>

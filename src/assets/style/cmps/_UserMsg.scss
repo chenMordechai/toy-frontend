@@ -1,23 +1,24 @@
 .user-msg {
-    background-color: lightgray;
-    padding: 0.2em 0.5em;
+    // background-color: lightgray;
+
+    padding: $pad2;
     position: fixed;
-    bottom: 0;
-    right: 1em;
+    top: 0;
+    right: 0;
     color: white;
     border-radius: 2px;
+    font-size: 1.2em;
 }
 
 .user-msg.success {
-    background-color: var(--clr1);
+    background-color: $clr-success;
 }
 
 .user-msg.error {
-    background-color: var(--clr2);
+    background-color: $clr-danger;
 }
 
 .user-msg button {
-    font-size: 0.5em;
     float: right;
-    margin: 0.5em;
+    margin-inline-start: 10px;
 }

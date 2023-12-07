@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { ToyReviewList } from "../cpms/ToyReviewList.jsx"
 import { ToyReviewFilter } from "../cpms/ToyReviewFilter.jsx"
 import { loadReviews, resetFilterBy, setFilterBy, setSortBy, removeReview } from '../store/actions/review.actions.js'
-
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
 
 export function ReviewExplore() {
     const { filterBy } = useSelector(storeState => storeState.reviewModule)
     const { sortBy } = useSelector(storeState => storeState.reviewModule)
-
     const { reviews } = useSelector(storeState => storeState.reviewModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
 
@@ -32,13 +31,13 @@ export function ReviewExplore() {
         setSortBy({ [name]: value })
     }
 
-
     async function onRemoveReview(reviewId) {
-        console.log('onRemoveReview', reviewId)
         try {
             await removeReview(reviewId)
+            showSuccessMsg('Remove Review: ' + reviewId)
         } catch (err) {
             console.log('Had issues in remove review', err)
+            showErrorMsg('Cannot Remove Review')
         }
     }
 

@@ -1,11 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-
-
 export function ToyReviewList({ reviews, onRemoveReview , loggedinUser }) {
     const [isReviewPage, setIsReviewPage] = useState(false)
-
     const params = useParams()
 
     useEffect(() => {

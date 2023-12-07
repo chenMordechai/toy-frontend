@@ -3,7 +3,7 @@ import { eventBusService } from "../services/event-bus.service.js"
 
 export function UserMsg() {
 
-    const [msg, setMsg] = useState(null)
+    const [msg, setMsg] = useState()
     const timeoutIdRef = useRef()
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export function UserMsg() {
     if (!msg) return ''
     return (
         <section className={`user-msg ${msg.type}`}>
-            <button onClick={closeMsg}>x</button>
+            <button className="btn" onClick={closeMsg}>x</button>
             {msg.txt}
         </section>
     )

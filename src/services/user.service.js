@@ -14,7 +14,8 @@ export const userService = {
     signup,
     getById,
     getLoggedinUser,
-    changeScore
+    changeScore,
+    getEmptyCredentials
 }
 
 
@@ -86,6 +87,15 @@ function _setLoggedinUser(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }
+
+function getEmptyCredentials() {
+    return {
+        fullname: '',
+        username: 'chen',
+        password: '123',
+    }
+}
+
 
 
 

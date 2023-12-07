@@ -13,22 +13,9 @@ export function ToySort({ sortBy, onSetSortBy }) {
 
     return (
         <section className="toy-sort">
-            {/* <h2>Sort</h2> */}
             <form >
                 <SelectMu />
-                {/* <label htmlFor="type">Sort By:</label>
-                <select onChange={handleChange} name="type" id="type" value={sortBy.type}>
-                    <option value=""></option>
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                    <option value="createdAt">Created</option>
-                </select> */}
-
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-
-                {/* <label htmlFor="desc">Descending?</label> */}
-                {/* <input onChange={handleChange} checked={(sortBy.desc === -1)} type="checkbox" id="desc" name="desc" /> */}
-
             </form>
         </section >
     )

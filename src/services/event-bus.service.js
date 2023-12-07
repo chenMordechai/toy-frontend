@@ -1,7 +1,5 @@
 function createEventEmitter() {
     const listenersMap = {}
-    // Trick for DEBUG
-    window.mapmap = listenersMap
     return {
         // Use this function to subscribe to an event
         on(evName, listener){

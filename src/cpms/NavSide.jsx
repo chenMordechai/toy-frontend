@@ -1,9 +1,5 @@
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faBell, faClipboard, faComments, faGear, faCarSide } from '@fortawesome/free-solid-svg-icons'
-
-
 
 export function NavSide() {
 

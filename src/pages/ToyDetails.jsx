@@ -1,12 +1,9 @@
-
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBackward } from '@fortawesome/free-solid-svg-icons'
-
 import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
 import { loadToy, saveToyMsg, removeToyMsg } from '../store/actions/toy.actions.js'
 import { loadReviews, resetFilterBy, saveReview, setFilterBy, removeReview } from '../store/actions/review.actions.js'
@@ -14,14 +11,13 @@ import { ToyMsgAdd } from "../cpms/ToyMsgAdd"
 import { ToyMsgList } from "../cpms/ToyMsgList.jsx"
 import { ToyReviewAdd } from "../cpms/ToyReviewAdd"
 import { ToyReviewList } from "../cpms/ToyReviewList.jsx"
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 
 export function ToyDetails() {
 
     const dispatch = useDispatch()
-
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
-    // const [toy, setToy] = useState(null)
     const { currToy: toy } = useSelector(storeState => storeState.toyModule)
     const { reviews } = useSelector(storeState => storeState.reviewModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
@@ -47,35 +43,42 @@ export function ToyDetails() {
 
     async function onSaveToyMsg(msg) {
         try {
-            await saveToyMsg(msg, toy._id)
+          const savedMsg=  await saveToyMsg(msg, toy._id)
+            showSuccessMsg('Save msg: ' + savedMsg.id)
         } catch (err) {
             console.log('Had issues in save msg', err)
+            showErrorMsg('Cannot Save msg')
         }
     }
-
+    
     async function onRemoveToyMsg(msgId) {
         try {
             await removeToyMsg(msgId, toy._id)
+            showSuccessMsg('Remove msg: ' + msgId)
         } catch (err) {
             console.log('Had issues in remove msg', err)
+            showErrorMsg('Cannot Remove msg: ' + msgId)
         }
     }
-
+    
     async function onSaveReview(review) {
         review = { ...review, aboutToyId: toy._id }
         try {
-            await saveReview(review)
+          const savedReview= await saveReview(review)
+            showSuccessMsg('Save review: '+savedReview._id)
         } catch (err) {
             console.log('Had issues in save review', err)
+            showErrorMsg('Cannot Save review' )
         }
     }
-
+    
     async function onRemoveReview(reviewId) {
-        console.log('onRemoveReview', reviewId)
         try {
             await removeReview(reviewId)
+            showSuccessMsg('Remove review: ' + reviewId)
         } catch (err) {
             console.log('Had issues in remove review', err)
+            showErrorMsg('Cannot Remove review:' )
         }
     }
 
