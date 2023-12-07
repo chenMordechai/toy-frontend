@@ -1,0 +1,28 @@
+.chat-room {
+    position: fixed;
+    bottom: 79px;
+    right: 0;
+    background-color: $clr1;
+    border: 2px solid black;
+    height: 300px;
+    width: 300px;
+    z-index: 10;
+
+    button {
+        float: right;
+    }
+
+    form {
+        background-color: $clr2;
+        @include flex(row, center, center, $pad2);
+        padding: $pad2;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        button.btn {
+            font-size: 0.8em;
+            border: 2px solid $clr6;
+        }
+    }
+}

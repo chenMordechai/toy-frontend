@@ -1,9 +1,9 @@
-import { useEffect } from "react"
+import { useEffect ,useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBackward } from '@fortawesome/free-solid-svg-icons'
+import { faBackward,faComments } from '@fortawesome/free-solid-svg-icons'
 import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
 import { loadToy, saveToyMsg, removeToyMsg } from '../store/actions/toy.actions.js'
 import { loadReviews, resetFilterBy, saveReview, setFilterBy, removeReview } from '../store/actions/review.actions.js'
@@ -11,6 +11,7 @@ import { ToyMsgAdd } from "../cpms/ToyMsgAdd"
 import { ToyMsgList } from "../cpms/ToyMsgList.jsx"
 import { ToyReviewAdd } from "../cpms/ToyReviewAdd"
 import { ToyReviewList } from "../cpms/ToyReviewList.jsx"
+import { ChatRoom } from "../cpms/ChatRoom.jsx"
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 
@@ -21,6 +22,7 @@ export function ToyDetails() {
     const { currToy: toy } = useSelector(storeState => storeState.toyModule)
     const { reviews } = useSelector(storeState => storeState.reviewModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    const [isChatOpen, setIsChatOpen] = useState(true)
 
     const { toyId } = useParams()
     const navigate = useNavigate()
@@ -82,39 +84,48 @@ export function ToyDetails() {
         }
     }
 
+    function onCloseChat(){
+        setIsChatOpen(false)
+    }
+    function onOpenChat(){
+        setIsChatOpen(true)
+    }
+
     return (
         <section >
             {isLoading && 'Loading...'}
             {!isLoading && toy &&
                 (<section className="toy-details">
+                    <section className="icons-container">
+                 <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
+                <button className="btn"> <FontAwesomeIcon onClick={onOpenChat} icon={faComments} /></button>
+              {  isChatOpen && <ChatRoom onCloseChat={onCloseChat} />}
+                    </section>
                     <section className="details-container" >
                         <div >
                             <h4>{toy.name}</h4>
-                            {/* <h4>Id: {toy._id}</h4> */}
                             <h4>$ {toy.price}</h4>
                             <h4>{toy.inStock && 'In Stock'}</h4>
-                            {/* <h4>Labels:</h4> */}
                             <ul>
-                                {toy.labels.map((l, i) => <li key={i}>{l},</li>)}
+                                {toy.labels.map((l, i) => <li key={i}>{l} {(i < toy.labels.length-1 )? ',': ''}</li>)}
                             </ul>
                         </div>
                         <div className="img-container">
-                            <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                             <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
                         </div>
                     </section>
-                    <section className="msgs-container">
 
-                    <section >
+                    <section className="msgs-container">
+                    <div >
                         <h3>Reviews:</h3>
                         <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
                         {loggedinUser &&<ToyReviewAdd onSaveReview={onSaveReview} />}
-                    </section>
-                    <section>
+                    </div>
+                    <div>
                         <h3>Messages:</h3>
                         <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} loggedinUser={loggedinUser} />
                        {loggedinUser&& <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />}
-                    </section>
+                    </div>
                     </section>
                 </section>)}
         </section>
