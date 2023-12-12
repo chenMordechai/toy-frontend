@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBackward,faComments } from '@fortawesome/free-solid-svg-icons'
-import { SET_IS_LOADING } from "../store/reducers/toy.reducer";
+import { SET_IS_LOADING , UPDATE_TOY_CHAT_HISTORY} from "../store/reducers/toy.reducer";
 import { loadToy, saveToyMsg, removeToyMsg } from '../store/actions/toy.actions.js'
 import { loadReviews, resetFilterBy, saveReview, setFilterBy, removeReview } from '../store/actions/review.actions.js'
 import { ToyMsgAdd } from "../cpms/ToyMsgAdd"
@@ -22,7 +22,7 @@ export function ToyDetails() {
     const { currToy: toy } = useSelector(storeState => storeState.toyModule)
     const { reviews } = useSelector(storeState => storeState.reviewModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    const [isChatOpen, setIsChatOpen] = useState(true)
+    const [isChatOpen, setIsChatOpen] = useState(false)
 
     const { toyId } = useParams()
     const navigate = useNavigate()
@@ -34,6 +34,7 @@ export function ToyDetails() {
     async function init() {
         try {
             await loadToy(toyId)
+            console.log('toy',toy)
             resetFilterBy()
             setFilterBy({ aboutToyId: toyId })
             loadReviews()
@@ -84,8 +85,9 @@ export function ToyDetails() {
         }
     }
 
-    function onCloseChat(){
+    function onCloseChat(chatHistory){
         setIsChatOpen(false)
+        dispatch({ type: UPDATE_TOY_CHAT_HISTORY, chatHistory })
     }
     function onOpenChat(){
         setIsChatOpen(true)
@@ -99,7 +101,7 @@ export function ToyDetails() {
                     <section className="icons-container">
                  <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
                 <button className="btn"> <FontAwesomeIcon onClick={onOpenChat} icon={faComments} /></button>
-              {  isChatOpen && <ChatRoom onCloseChat={onCloseChat} topic={toy._id} />}
+              {  isChatOpen && <ChatRoom onCloseChat={onCloseChat} topic={toy._id} history={toy.chatHistory} />}
                     </section>
                     <section className="details-container" >
                         <div >

@@ -1,13 +1,17 @@
 import io from 'socket.io-client'
 import { userService } from './user.service'
 
-export const SOCKET_EVENT_IS_TYPING = 'chat-is-typing'
-export const SOCKET_EVENT_SHOW_TYPING = 'chat-show-typing'
-export const SOCKET_EVENT_ADD_MSG = 'chat-add-msg'
-export const SOCKET_EMIT_SEND_MSG = 'chat-send-msg'
 export const SOCKET_EMIT_SET_TOPIC = 'chat-set-topic'
-export const SOCKET_EMIT_USER_WATCH = 'user-watch'
+export const SOCKET_EMIT_SEND_MSG = 'chat-send-msg'
+
+export const SOCKET_EMIT_TYPING = 'chat-user-typing';
+export const SOCKET_EMIT_STOP_TYPING = 'chat-stop-typing';
+
+export const SOCKET_EVENT_TYPING = 'chat-add-typing'
+export const SOCKET_EVENT_STOP_TYPING = 'chat-remove-typing'
+
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
+export const SOCKET_EVENT_ADD_MSG = 'chat-add-msg'
 
 export const SOCKET_EVENT_TOY_UPDATE = 'toy-updated'
 export const SOCKET_EVENT_TOY_ADDED = 'toy-added'

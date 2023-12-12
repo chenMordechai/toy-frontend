@@ -13,6 +13,7 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const SET_FILTER_CATEGORY = 'SET_FILTER_CATEGORY'
 export const UPDATE_TOY_MSGS = 'UPDATE_TOY_MSGS'
 export const REMOVE_TOY_MSGS = 'REMOVE_TOY_MSGS'
+export const UPDATE_TOY_CHAT_HISTORY = 'UPDATE_TOY_CHAT_HISTORY'
 
 
 const initialState = {
@@ -33,7 +34,10 @@ export function toyReducer(state = initialState, action = {}) {
         case SET_TOY:
             return { ...state, currToy: action.toy }
 
-        case UPDATE_TOY_MSGS:
+        case UPDATE_TOY_CHAT_HISTORY:
+           return { ...state, currToy: { ...state.currToy, chatHistory: action.chatHistory} }
+       
+           case UPDATE_TOY_MSGS:
             return { ...state, currToy: { ...state.currToy, msgs: [...state.currToy.msgs, action.msg] } }
 
         case REMOVE_TOY_MSGS:
