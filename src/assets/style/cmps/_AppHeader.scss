@@ -3,7 +3,7 @@
   height: 70px;
   width: 100%;
   background-color: $clr3;
-  padding: $pad3;
+  padding: $pad1;
   @include flex(row, center, space-between, $pad1);
   position: sticky;
   top: 0;

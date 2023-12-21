@@ -1,10 +1,10 @@
-import { useEffect ,useState} from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBackward,faComments } from '@fortawesome/free-solid-svg-icons'
-import { SET_IS_LOADING , UPDATE_TOY_CHAT_HISTORY} from "../store/reducers/toy.reducer";
+import { faBackward, faComments } from '@fortawesome/free-solid-svg-icons'
+import { SET_IS_LOADING, UPDATE_TOY_CHAT_HISTORY } from "../store/reducers/toy.reducer";
 import { loadToy, saveToyMsg, removeToyMsg } from '../store/actions/toy.actions.js'
 import { loadReviews, resetFilterBy, saveReview, setFilterBy, removeReview } from '../store/actions/review.actions.js'
 import { ToyMsgAdd } from "../cpms/ToyMsgAdd"
@@ -13,7 +13,7 @@ import { ToyReviewAdd } from "../cpms/ToyReviewAdd"
 import { ToyReviewList } from "../cpms/ToyReviewList.jsx"
 import { ChatRoom } from "../cpms/ChatRoom.jsx"
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-
+import { utilService } from "../services/util.service.js"
 
 export function ToyDetails() {
 
@@ -34,7 +34,7 @@ export function ToyDetails() {
     async function init() {
         try {
             await loadToy(toyId)
-            console.log('toy',toy)
+            console.log('toy', toy)
             resetFilterBy()
             setFilterBy({ aboutToyId: toyId })
             loadReviews()
@@ -46,14 +46,14 @@ export function ToyDetails() {
 
     async function onSaveToyMsg(msg) {
         try {
-          const savedMsg=  await saveToyMsg(msg, toy._id)
+            const savedMsg = await saveToyMsg(msg, toy._id)
             showSuccessMsg('Save msg: ' + savedMsg.id)
         } catch (err) {
             console.log('Had issues in save msg', err)
             showErrorMsg('Cannot Save msg')
         }
     }
-    
+
     async function onRemoveToyMsg(msgId) {
         try {
             await removeToyMsg(msgId, toy._id)
@@ -63,33 +63,33 @@ export function ToyDetails() {
             showErrorMsg('Cannot Remove msg: ' + msgId)
         }
     }
-    
+
     async function onSaveReview(review) {
         review = { ...review, aboutToyId: toy._id }
         try {
-          const savedReview= await saveReview(review)
-            showSuccessMsg('Save review: '+savedReview._id)
+            const savedReview = await saveReview(review)
+            showSuccessMsg('Save review: ' + savedReview._id)
         } catch (err) {
             console.log('Had issues in save review', err)
-            showErrorMsg('Cannot Save review' )
+            showErrorMsg('Cannot Save review')
         }
     }
-    
+
     async function onRemoveReview(reviewId) {
         try {
             await removeReview(reviewId)
             showSuccessMsg('Remove review: ' + reviewId)
         } catch (err) {
             console.log('Had issues in remove review', err)
-            showErrorMsg('Cannot Remove review:' )
+            showErrorMsg('Cannot Remove review:')
         }
     }
 
-    function onCloseChat(chatHistory){
+    function onCloseChat(chatHistory) {
         setIsChatOpen(false)
         dispatch({ type: UPDATE_TOY_CHAT_HISTORY, chatHistory })
     }
-    function onOpenChat(){
+    function onOpenChat() {
         setIsChatOpen(true)
     }
 
@@ -99,9 +99,9 @@ export function ToyDetails() {
             {!isLoading && toy &&
                 (<section className="toy-details">
                     <section className="icons-container">
-                 <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
-                <button className="btn"> <FontAwesomeIcon onClick={onOpenChat} icon={faComments} /></button>
-              {  isChatOpen && <ChatRoom onCloseChat={onCloseChat} topic={toy._id} history={toy.chatHistory} />}
+                        <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
+                        <button className="btn"> <FontAwesomeIcon onClick={onOpenChat} icon={faComments} /></button>
+                        {isChatOpen && <ChatRoom onCloseChat={onCloseChat} topic={toy._id} history={toy.chatHistory} />}
                     </section>
                     <section className="details-container" >
                         <div >
@@ -109,25 +109,24 @@ export function ToyDetails() {
                             <h4>$ {toy.price}</h4>
                             <h4>{toy.inStock && 'In Stock'}</h4>
                             <ul>
-                                {toy.labels.map((l, i) => <li key={i}>{l} {(i < toy.labels.length-1 )? ',': ''}</li>)}
+                                {toy.labels.map((l, i) => <li key={i}>{l} {(i < toy.labels.length - 1) ? ',' : ''}</li>)}
                             </ul>
                         </div>
                         <div className="img-container">
-                            <img src={`/src/assets/img/${toy.imgId}.png`} alt="" />
+                            {/* <img src={`/src/assets/img/${toy.imgId}.png`} alt="" /> */}
+                            <img src={utilService.getAssetSrc(toy.imgId)} />
                         </div>
                     </section>
 
                     <section className="msgs-container">
-                    <div >
-                        <h3>Reviews:</h3>
-                        <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
-                        {loggedinUser &&<ToyReviewAdd onSaveReview={onSaveReview} />}
-                    </div>
-                    <div>
-                        <h3>Messages:</h3>
-                        <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} loggedinUser={loggedinUser} />
-                       {loggedinUser&& <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />}
-                    </div>
+                        <div >
+                            <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
+                            {loggedinUser && <ToyReviewAdd onSaveReview={onSaveReview} />}
+                        </div>
+                        <div>
+                            <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} loggedinUser={loggedinUser} />
+                            {loggedinUser && <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />}
+                        </div>
                     </section>
                 </section>)}
         </section>

@@ -84,6 +84,7 @@
 @mixin section-with-ul {
     padding: $pad2;
     background-color: $clr1;
+    border-radius: 10px;
 
     li {
         margin: $pad1;

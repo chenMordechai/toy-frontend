@@ -6,6 +6,7 @@
 
         li {
             @include flex(column, center, center, $pad1);
+            flex-grow: 1;
 
             background-color: $clr1;
             border-radius: 10px;
@@ -14,7 +15,6 @@
 
             @include for-mobile-layout {
                 padding: $pad2;
-                flex-grow: 1;
             }
 
             .controls {

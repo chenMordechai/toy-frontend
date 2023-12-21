@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export function ToyReviewList({ reviews, onRemoveReview , loggedinUser }) {
+export function ToyReviewList({ reviews, onRemoveReview, loggedinUser }) {
     const [isReviewPage, setIsReviewPage] = useState(false)
     const params = useParams()
 
@@ -13,9 +13,10 @@ export function ToyReviewList({ reviews, onRemoveReview , loggedinUser }) {
 
     return (
         <section className="toy-review-list">
+            <h3>Reviews:</h3>
             <ul>{reviews.map(r => <li
                 key={r._id}>
-               {loggedinUser?.isAdmin && <button className="btn" onClick={() => {
+                {loggedinUser?.isAdmin && <button className="btn" onClick={() => {
                     onRemoveReview(r._id)
                 }}>x</button>}
                 {r.txt}

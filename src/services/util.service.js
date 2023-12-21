@@ -77,15 +77,11 @@ function animateCSS(el, animation) {
 }
 
 function getAssetSrc(name) {
-    // const path = `/src/assets/img/${name}`
-    // const modules = import.meta.globEager('/src/assets/img/*')
-    // const mod = modules[path]
-    // return mod.default
     return new URL(`/src/assets/img/${name}.png`, import.meta.url).href
 
 }
 
 function getRandomColor() {
-  const  color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+    const color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
     return color;
-  }
+}
