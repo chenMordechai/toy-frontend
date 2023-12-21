@@ -10,7 +10,6 @@ import { SOCKET_EVENT_TOY_ADDED, SOCKET_EVENT_TOY_REMOVED, socketService } from 
 
 
 export function ToyIndex() {
-    console.log('hi')
     const { toys } = useSelector(storeState => storeState.toyModule)
     const { filterBy } = useSelector(storeState => storeState.toyModule)
     const { sortBy } = useSelector(storeState => storeState.toyModule)

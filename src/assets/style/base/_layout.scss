@@ -51,7 +51,7 @@
   main {
     grid-area: main;
     background-color: $clr3;
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     padding: $pad1;
     padding-top: 0;
   }

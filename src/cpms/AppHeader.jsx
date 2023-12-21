@@ -34,7 +34,7 @@ export function AppHeader({onToggleScreen,onCloseScreen}) {
         onCloseScreen(true)
     }
 
-    function onToggleSignupModal(isOpen){
+    function onToggleSignupModal(){
         setIsSignupOpen(true)
         onToggleScreen(false)
     }
@@ -43,10 +43,10 @@ export function AppHeader({onToggleScreen,onCloseScreen}) {
         <section className="app-header">
             <section className="link-container">
             
-                <NavLink to={'/'}>Home</NavLink>
-                <NavLink to={'/toy'}>Shop</NavLink>
-                <NavLink to={'/review'}>Reviews</NavLink>
-                {user && <NavLink to={'/user/' + user._id}>Profile</NavLink>}
+                <NavLink to={'/'} onClick={()=>onCloseScreen(true)}>Home</NavLink>
+                <NavLink to={'/toy'} onClick={()=>onCloseScreen(true)}>Shop</NavLink>
+                <NavLink to={'/review'} onClick={()=>onCloseScreen(true)}>Reviews</NavLink>
+                {user && <NavLink to={'/user/' + user._id} onClick={()=>onCloseScreen(true)}>Profile</NavLink>}
             </section>
 
             {!user && <button className="btn light" onClick={() => {
@@ -55,14 +55,14 @@ export function AppHeader({onToggleScreen,onCloseScreen}) {
 
 
             {user && <section className="user-info">
+                {user.isAdmin && <span>Admin</span>}
+                <span>{user.fullname}</span>
                 <a href="#" onClick={(ev) => {
                     ev.preventDefault()
                     dispatch({ type: SET_CART_IS_SHOWN, isCartShown: !isCartShown })
                 }}>
                     🛒
                 </a>
-                <span>{user.fullname}</span>
-                {user.isAdmin && <span>Admin</span>}
                 <button className="btn light" onClick={onLogout}>Logout </button>
             </section>}
             

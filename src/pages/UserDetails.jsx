@@ -43,7 +43,6 @@ export function UserDetails() {
     return (
         <section className="user-details">
             <h3>{user.fullname} {user.isAdmin && <span>- Admin</span>}</h3>
-            <h4>Reviews:</h4>
             <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={user}  />
         </section>
     )
