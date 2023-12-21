@@ -15,17 +15,23 @@ export const UPDATE_TOY_MSGS = 'UPDATE_TOY_MSGS'
 export const REMOVE_TOY_MSGS = 'REMOVE_TOY_MSGS'
 export const UPDATE_TOY_CHAT_HISTORY = 'UPDATE_TOY_CHAT_HISTORY'
 
+export const SET_CART_IS_SHOWN = 'SET_CART_IS_SHOWN'
+export const REMOVE_TOY_FROM_CART = 'REMOVE_CAR_FROM_CART'
+export const ADD_TOY_TO_CART = 'ADD_CAR_TO_CART'
+export const CLEAR_CART = 'CLEAR_CART'
 
 const initialState = {
     toys: [],
     currToy: null,
     filterBy: toyService.getDefaultFilter(),
     sortBy: toyService.getDefaultSort(),
-    isLoading: false
+    isLoading: false,
+    shoppingCart: [],
 }
 
 export function toyReducer(state = initialState, action = {}) {
     let toys
+    let shoppingCart
     switch (action.type) {
         // Toys
         case SET_TOYS:
@@ -55,7 +61,6 @@ export function toyReducer(state = initialState, action = {}) {
             toys = state.toys.map(toy => toy._id === action.toy._id ? action.toy : toy)
             return { ...state, toys }
 
-
         case SET_FILTER_BY:
             return { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
 
@@ -68,8 +73,6 @@ export function toyReducer(state = initialState, action = {}) {
             //     } else {
             // return {...state, filterBy : {...state.filterBy ,labels: state.filterBy.labels.filter(l => l !==  action.label.name)}}
             return { ...state, filterBy: { ...state.filterBy, labels: action.labels } }
-
-
         }
 
         case SET_SORT_BY:
@@ -77,6 +80,21 @@ export function toyReducer(state = initialState, action = {}) {
 
         case SET_IS_LOADING:
             return { ...state, isLoading: action.isLoading }
+
+             // Shopping Cart
+        case SET_CART_IS_SHOWN:
+            return { ...state, isCartShown: action.isCartShown }
+
+        case ADD_TOY_TO_CART:
+            shoppingCart = [...state.shoppingCart, action.toy]
+            return { ...state, shoppingCart }
+
+        case REMOVE_TOY_FROM_CART:
+            shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
+            return { ...state, shoppingCart }
+
+        case CLEAR_CART:
+            return { ...state, shoppingCart: [] }
 
         default:
             return state;

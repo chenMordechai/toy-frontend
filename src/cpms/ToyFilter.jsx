@@ -13,7 +13,7 @@ import { SelectMu } from "./SelectMu"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 
-export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange, labelsToShow, sortBy, onSetSortBy, UserIsAdmin }) {
+export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange, labelsToShow, sortBy, onSetSortBy, userIsAdmin }) {
 
     return (
         <section className="toy-filter">
@@ -36,7 +36,7 @@ export function ToyFilter({ filterBy, onSetFilterBy, handleLabelChange, labelsTo
                 <SelectMu handleChange={onSetSortBy} name="type" value={sortBy.type} label="Sort by" options={['Name', 'Price', 'Created At']} values={['name', 'price', 'createdAt']} />
                 <FormControlLabel control={<Checkbox name="desc" checked={(sortBy.desc === -1)} onChange={onSetSortBy} />} label="Descending" />
 
-                {UserIsAdmin && <Link className="btn dark" to="/toy/edit">Add New Toy</Link>}
+                {userIsAdmin && <Link className="btn dark" to="/toy/edit">Add New Toy</Link>}
 
             </form>
 

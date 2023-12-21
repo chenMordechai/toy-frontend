@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service.js";
-// import { CLEAR_CART } from "../reducers/car.reducer.js";
+import { CLEAR_CART } from "../reducers/toy.reducer.js";
 import { SET_USER } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
@@ -42,13 +42,12 @@ export async function logout() {
 }
 
 
-// export async function checkout(diff) {
-//     try {
-//         const newScore = await userService.changeScore(diff)
-//         store.dispatch({ type: CLEAR_CART })
-//         store.dispatch({ type: SET_USER_SCORE, score: newScore })
-//     } catch (err) {
-//         console.error('user actions -> Cannot checkout:', err)
-//         throw err
-//     }
-// }
+export async function checkout(diff) {
+    try {
+        const newScore = await userService.changeScore(diff)
+        store.dispatch({ type: CLEAR_CART })
+    } catch (err) {
+        console.error('user actions -> Cannot checkout:', err)
+        throw err
+    }
+}

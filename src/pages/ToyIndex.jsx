@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { toyService } from '../services/toy.service.js'
 import { loadToys, removeToy, setFilterBy, setSortBy, setLabels } from '../store/actions/toy.actions.js'
-import { ADD_TOY ,REMOVE_TOY } from '../store/reducers/toy.reducer.js'
+import {ADD_TOY_TO_CART, ADD_TOY ,REMOVE_TOY } from '../store/reducers/toy.reducer.js'
 import { ToyList } from '../cpms/ToyList.jsx'
 import { ToyFilter } from '../cpms/ToyFilter.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
@@ -10,6 +10,7 @@ import { SOCKET_EVENT_TOY_ADDED, SOCKET_EVENT_TOY_REMOVED, socketService } from 
 
 
 export function ToyIndex() {
+    console.log('hi')
     const { toys } = useSelector(storeState => storeState.toyModule)
     const { filterBy } = useSelector(storeState => storeState.toyModule)
     const { sortBy } = useSelector(storeState => storeState.toyModule)
@@ -66,16 +67,22 @@ export function ToyIndex() {
         setLabels(labels)
     }
 
+    function addToCart(toy) {
+        console.log(`Adding ${toy.name} to Cart`)
+        dispatch({ type: ADD_TOY_TO_CART, toy })
+        showSuccessMsg('Added to Cart')
+    }
+
     return (
         <section className="toy-index">
 
             <section className="filter-container">
-                <ToyFilter UserIsAdmin={loggedinUser?.isAdmin} filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} sortBy={sortBy} onSetSortBy={onSetSortBy} />
+                <ToyFilter userIsAdmin={loggedinUser?.isAdmin} filterBy={filterBy} onSetFilterBy={onSetFilterBy} handleLabelChange={handleLabelChange} labelsToShow={labels} sortBy={sortBy} onSetSortBy={onSetSortBy} />
             </section>
 
             <section className="list-container">
                 {isLoading && 'Loading..'}
-                {!isLoading && <ToyList UserIsAdmin={loggedinUser?.isAdmin} toys={toys} onRemoveToy={onRemoveToy} />}
+                {!isLoading && <ToyList userIsAdmin={loggedinUser?.isAdmin} toys={toys} onRemoveToy={onRemoveToy} addToCart={addToCart} />}
             </section>
 
 

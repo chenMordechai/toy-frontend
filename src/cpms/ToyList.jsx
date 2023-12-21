@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { ToyPreview } from "./ToyPreview"
 
-export function ToyList({ toys, onRemoveToy, UserIsAdmin }) {
+export function ToyList({ toys, onRemoveToy, userIsAdmin , addToCart }) {
 
     return (
         <section className="toy-list">
             <ul>
                 {toys.map(toy => <li key={toy._id}>
-                    {UserIsAdmin && <section className="controls">
+                    {userIsAdmin && <section className="controls">
                         <button className="btn small" onClick={() => {
                             onRemoveToy(toy._id)
                         }}><FontAwesomeIcon icon={faTrash} /></button>
@@ -19,6 +19,7 @@ export function ToyList({ toys, onRemoveToy, UserIsAdmin }) {
                     <Link to={`/toy/${toy._id}`}>
                         <ToyPreview toy={toy} />
                     </Link>
+                    <button className="btn" onClick={() => addToCart(toy)}>Add to Cart</button>
                 </li>
                 )}
             </ul>
