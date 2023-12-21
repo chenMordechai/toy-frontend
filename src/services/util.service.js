@@ -1,3 +1,5 @@
+import {CLOUD_NAME , UPLOAD_PRESET} from '../../dist/pass.js'
+
 export const utilService = {
     makeId,
     makeLorem,
@@ -7,7 +9,8 @@ export const utilService = {
     animateCSS,
     debounce,
     getAssetSrc,
-    getRandomColor
+    getRandomColor,
+    uploadImgToCloudinary,
 }
 
 function makeId(length = 6) {
@@ -84,4 +87,33 @@ function getAssetSrc(name) {
 function getRandomColor() {
     const color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
     return color;
+}
+
+async function uploadImgToCloudinary(ev){
+        //Defining our variables
+        console.log('CLOUD_NAME:', CLOUD_NAME)
+        console.log('UPLOAD_PRESET:', UPLOAD_PRESET)
+
+        const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+        const FORM_DATA = new FormData()
+      
+        // //Bulding the request body
+        FORM_DATA.append('file', ev.target.files[0])
+        FORM_DATA.append('upload_preset', UPLOAD_PRESET)
+      
+        // // Sending a post method request to Cloudinarys API
+      
+        try {
+          const res = await fetch(UPLOAD_URL, {
+            method: 'POST',
+            body: FORM_DATA,
+          })
+        //   const elImg = document.createElement('img')
+          const { url } = await res.json()
+          return url
+        //   elImg.src = url
+        //   document.body.append(elImg)
+        } catch (err) {
+          console.error(err)
+        }
 }
