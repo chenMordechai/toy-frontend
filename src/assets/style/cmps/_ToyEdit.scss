@@ -5,7 +5,7 @@
     @include flex(row-reverse, center, space-evenly);
 
     @include for-mobile-layout {
-        @include flex(column, center, center, $pad2);
+        @include flex(column-reverse, center, center, $pad2);
     }
 
     form {

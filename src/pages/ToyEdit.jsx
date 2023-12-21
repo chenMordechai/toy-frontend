@@ -70,11 +70,8 @@ export function ToyEdit() {
     }
 
   async  function uploadImg(ev) {
-        // console.log('ev:', ev)
        const imgUrl = await utilService.uploadImgToCloudinary(ev)
-       console.log('imgUrl:', imgUrl)
-       console.log('toyToEdit:', toyToEdit)
-       setToyToEdit(prevToy => ({ ...prevToy, imgId: imgUrl }))
+       setToyToEdit(prevToy => ({ ...prevToy, imgUrl: imgUrl }))
     }
 
     return (
@@ -89,9 +86,9 @@ export function ToyEdit() {
 
             <div className="img-container">
                 <Link to="/toy"><FontAwesomeIcon icon={faBackward} /> Back</Link>
-                {/* {toyToEdit.imgId && <img src={utilService.getAssetSrc(toyToEdit.imgId)} />} */}
-                {toyToEdit.imgId && <img src={toyToEdit.imgId} />}
-                {!toyToEdit.imgId && <label> Upload Toy Image:
+                {/* {toyToEdit.imgUrl && <img src={utilService.getAssetSrc(toyToEdit.imgUrl)} />} */}
+                {toyToEdit.imgUrl && <img src={toyToEdit.imgUrl} />}
+                {!toyToEdit.imgUrl && <label> Upload Toy Image:
                     <input type="file" onChange={uploadImg} />
                 </label>}
 

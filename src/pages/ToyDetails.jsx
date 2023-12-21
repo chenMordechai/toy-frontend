@@ -113,8 +113,9 @@ export function ToyDetails() {
                             </ul>
                         </div>
                         <div className="img-container">
-                            {/* <img src={`/src/assets/img/${toy.imgId}.png`} alt="" /> */}
-                            <img src={utilService.getAssetSrc(toy.imgId)} />
+                            {/* <img src={`/src/assets/img/${toy.imgUrl}.png`} alt="" /> */}
+                            {/* <img src={utilService.getAssetSrc(toy.imgUrl)} /> */}
+                            <img src={toy.imgUrl} />
                         </div>
                     </section>
 
@@ -123,10 +124,10 @@ export function ToyDetails() {
                             <ToyReviewList reviews={reviews} onRemoveReview={onRemoveReview} loggedinUser={loggedinUser} />
                             {loggedinUser && <ToyReviewAdd onSaveReview={onSaveReview} />}
                         </div>
-                        <div>
+                      { toy.msgs && <div>
                             <ToyMsgList msgs={toy.msgs} onRemoveToyMsg={onRemoveToyMsg} loggedinUser={loggedinUser} />
                             {loggedinUser && <ToyMsgAdd onSaveToyMsg={onSaveToyMsg} />}
-                        </div>
+                        </div>}
                     </section>
                 </section>)}
         </section>

@@ -109,7 +109,9 @@ function getEmptyToy() {
         name: '',
         inStock: true,
         price: 0,
-        labels: []
+        labels: [],
+        msgs:[]
+    
     }
 }
 
