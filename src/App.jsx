@@ -1,6 +1,7 @@
 // import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { useState } from 'react';
 import './assets/style/main.scss'
 
 import { HomePage } from './pages/HomePage'
@@ -19,11 +20,28 @@ import { UserDetails } from './pages/UserDetails'
 
 export function App() {
 
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
+  function onToggleScreen(isMenu){
+    if(isMenu === true) setIsOpenMenu(prev=>!prev)
+    else setIsOpenModal(prev=>!prev)
+  }
+
+  function onCloseScreen(isCloseModal){
+      if(isOpenMenu){
+      setIsOpenMenu(false)
+    }else if(isCloseModal === true){
+       setIsOpenModal(false)
+    }
+  }
+
   return (
     <Provider store={store}>
       <Router>
-        <section className="main-layout app">
-          <AppHeader />
+        <section className={'main-layout app ' + (isOpenMenu?'open-menu':'')+ (isOpenModal?'open-modal':'')}>
+        <section className="screen" onClick={onCloseScreen}></section>
+          <AppHeader onToggleScreen={onToggleScreen} onCloseScreen={onCloseScreen} />
           <NavSide />
           <CategoryList />
           <main>

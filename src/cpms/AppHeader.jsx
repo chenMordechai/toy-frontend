@@ -6,7 +6,7 @@ import { logout } from '../store/actions/user.actions.js'
 import { Signup } from './Signup.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
-export function AppHeader() {
+export function AppHeader({onToggleScreen,onCloseScreen}) {
     const user = useSelector(storeState => storeState.userModule.loggedinUser)
     const [isSignupOpen, setIsSignupOpen] = useState(false)
 
@@ -24,7 +24,14 @@ export function AppHeader() {
     }
     function onCloseSignup() {
         setIsSignupOpen(false)
+        onCloseScreen(true)
     }
+
+    function onToggleSignupModal(isOpen){
+        setIsSignupOpen(true)
+        onToggleScreen(false)
+    }
+
     return (
         <section className="app-header">
             <section className="link-container">
@@ -35,10 +42,9 @@ export function AppHeader() {
             </section>
 
             {!user && <button className="btn light" onClick={() => {
-                setIsSignupOpen(true)
+                onToggleSignupModal(true)
             }}>Login/Signup</button>}
 
-            <UserMsg />
 
             {user && <section className="user-info">
 
@@ -46,7 +52,11 @@ export function AppHeader() {
                 {user.isAdmin && <span>Admin</span>}
                 <button className="btn light" onClick={onLogout}>Logout </button>
             </section>}
+
             {isSignupOpen && <Signup onCloseSignup={onCloseSignup} />}
+      
+            <UserMsg />
+            <button className="menu-btn" onClick={()=>onToggleScreen(true)}><span></span></button>
         </section>
     )
 }

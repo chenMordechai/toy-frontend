@@ -14,6 +14,7 @@ export function Signup({ onCloseSignup }) {
 
     return (
         <section className="signup">
+            <button className="btn" onClick={onCloseSignup}>x</button>
             <h2>Signup</h2>
 
             {!user && <section className="user-info">
