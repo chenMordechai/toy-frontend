@@ -27,11 +27,10 @@
       height: max-content;
       padding-bottom: $pad1;
       margin: 0;
-      // display: none;
-      .main-layout.open-menu & {
-        translate: 0% 0%;
-      }
     }
+  }
+  &.links-open .link-container {
+    translate: 0% 0%;
   }
 
   .user-info {
@@ -45,6 +44,21 @@
     a {
       font-size: 1em;
       color: $clr7;
+    }
+  }
+  &.links-open .menu-btn {
+    translate: 0% 0%;
+    @include for-mobile-layout {
+      span {
+        background-color: transparent;
+
+        &::before {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+        &::after {
+          transform: rotate(-45deg) translate(7px, -8px);
+        }
+      }
     }
   }
 
@@ -79,16 +93,6 @@
           transition: all 0.3s;
           backface-visibility: hidden;
           border-radius: 2px;
-        }
-
-        .main-layout.open-menu & {
-          background-color: transparent;
-        }
-        .main-layout.open-menu &::before {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        .main-layout.open-menu &::after {
-          transform: rotate(-45deg) translate(7px, -8px);
         }
       }
     }

@@ -20,12 +20,18 @@
             .controls {
                 display: flex;
                 justify-content: space-between;
-                font-size: 1.3em;
                 width: 100%;
+                font-size: 1.3em;
 
                 svg {
                     cursor: pointer;
                 }
+            }
+
+            .btn-add {
+                font-size: 2em;
+                cursor: pointer;
+                border: none;
             }
         }
     }

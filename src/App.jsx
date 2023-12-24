@@ -20,28 +20,22 @@ import { UserDetails } from './pages/UserDetails'
 
 export function App() {
 
-  const [isOpenMenu, setIsOpenMenu] = useState(false)
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isScreenOpen, setIsScreenOpen] = useState(false)
 
-  function onToggleScreen(isMenu){
-    if(isMenu === true) setIsOpenMenu(prev=>!prev)
-    else setIsOpenModal(prev=>!prev)
+  function onOpenScreen(){
+    setIsScreenOpen(true)
   }
 
-  function onCloseScreen(isCloseModal){
-      if(isOpenMenu){
-      setIsOpenMenu(false)
-    }else if(isCloseModal === true){
-       setIsOpenModal(false)
-    }
+  function onCloseScreen(){
+    setIsScreenOpen(false)
   }
 
   return (
     <Provider store={store}>
       <Router>
-        <section className={'main-layout app ' + (isOpenMenu?'open-menu':'')+ (isOpenModal?'open-modal':'')}>
+        <section className={'main-layout app ' + (isScreenOpen?'screen-open':'')}>
         <section className="screen" onClick={onCloseScreen}></section>
-          <AppHeader onToggleScreen={onToggleScreen} onCloseScreen={onCloseScreen} />
+          <AppHeader isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} />
           <NavSide />
           <CategoryList />
           <main>

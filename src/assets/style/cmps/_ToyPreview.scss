@@ -1,6 +1,5 @@
 .toy-preview {
-    display: flex;
-    flex-direction: column;
+    @include flex(column, center, center);
     color: $clr6;
     font-size: 0.8em;
 

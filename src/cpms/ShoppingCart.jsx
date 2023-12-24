@@ -5,7 +5,7 @@ import { userService } from '../services/user.service.js'
 import { checkout } from '../store/actions/user.actions.js'
 import {REMOVE_TOY_FROM_CART , CLEAR_CART } from '../store/reducers/toy.reducer.js'
 
-export function ShoppingCart({ isCartShown, shoppingCart }) {
+export function ShoppingCart({ shoppingCart }) {
     const dispatch = useDispatch()
     const user = useSelector(storeState => storeState.userModule.loggedinUser)
 
@@ -23,7 +23,7 @@ export function ShoppingCart({ isCartShown, shoppingCart }) {
         showSuccessMsg(`Charged you: $ ${amount.toLocaleString()}`)
     }
 
-    if (!isCartShown) return ''
+   
     const total = getCartTotal()
     return (
         <section className="cart" >

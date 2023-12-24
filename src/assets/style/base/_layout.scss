@@ -44,8 +44,7 @@
     display: none;
   }
 
-  &.open-menu .screen,
-  &.open-modal .screen {
+  &.screen-open .screen {
     display: block;
   }
   main {

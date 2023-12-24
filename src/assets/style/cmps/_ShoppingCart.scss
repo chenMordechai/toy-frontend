@@ -1,17 +1,23 @@
 .cart {
-    position: absolute;
+    position: fixed;
+    left: 0px;
     top: 70px;
-    right: 0;
-    background-color: $clr3;
-    width: 200px;
-    // min-height: 200px;
-    padding: $pad1;
-    // font-size: 1.3em;
-    // text-align: center;
-    color: $clr6;
-    @include flex(column, center, center, $pad1);
 
-    // ul {
+    @include flex(column, center, center, $pad1);
+    color: $clr6;
+    background-color: inherit;
+    width: 250px;
+    height: max-content;
+    padding: $pad1;
+
+    translate: -250px 0px;
+    transition: translate 0.6s;
+
+    .app-header.cart-open & {
+        translate: 0% 0%;
+    }
+
+    // // ul {
     //     display: flex;
     //     flex-direction: column;
     //     align-items: start;

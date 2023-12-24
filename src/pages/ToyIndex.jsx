@@ -81,7 +81,7 @@ export function ToyIndex() {
 
             <section className="list-container">
                 {isLoading && 'Loading..'}
-                {!isLoading && <ToyList userIsAdmin={loggedinUser?.isAdmin} toys={toys} onRemoveToy={onRemoveToy} addToCart={addToCart} />}
+                {!isLoading && <ToyList loggedinUser={loggedinUser}  toys={toys} onRemoveToy={onRemoveToy} addToCart={addToCart} />}
             </section>
 
 

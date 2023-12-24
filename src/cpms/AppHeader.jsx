@@ -1,5 +1,5 @@
-import {useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react';
+import { useSelector} from 'react-redux'
+import { useState,useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { UserMsg } from './UserMsg.jsx'
 import { ShoppingCart } from './ShoppingCart.jsx'
@@ -8,15 +8,32 @@ import { Signup } from './Signup.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 import { SET_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 
-export function AppHeader({onToggleScreen,onCloseScreen}) {
-    const user = useSelector(storeState => storeState.userModule.loggedinUser)
+export function AppHeader({isScreenOpen,onOpenScreen,onCloseScreen}) {
     const [isSignupOpen, setIsSignupOpen] = useState(false)
-
-    const dispatch = useDispatch()
-    const isCartShown = useSelector(storeState => storeState.toyModule.isCartShown)
-    // const isCartShown = useSelector(storeState => storeState.carModule.isCartShown)
+    const [isLinksOpen, setIsLinksOpen] = useState(false)
+    const [isCartOpen, setIsCartOpen] = useState(false)
+    
+    const user = useSelector(storeState => storeState.userModule.loggedinUser)
     const shoppingCart = useSelector(storeState => storeState.toyModule.shoppingCart)
    
+    useEffect(()=>{
+        if(isSignupOpen ||isLinksOpen|| isCartOpen ){
+            onOpenScreen()
+        }else{
+            onCloseScreen()
+        }
+
+    },[isSignupOpen,isLinksOpen,isCartOpen])
+
+    useEffect(()=>{
+        if(!isScreenOpen ){
+            setIsSignupOpen(false)
+            setIsLinksOpen(false)
+            setIsCartOpen(false)
+        }
+
+    },[isScreenOpen])
+
     async function onLogout() {
         console.log('onLogout')
         try {
@@ -29,20 +46,10 @@ export function AppHeader({onToggleScreen,onCloseScreen}) {
         }
 
     }
-    function onCloseSignup() {
-        setIsSignupOpen(false)
-        onCloseScreen(true)
-    }
-
-    function onToggleSignupModal(){
-        setIsSignupOpen(true)
-        onToggleScreen(false)
-    }
 
     return (
-        <section className="app-header">
+        <section className={`app-header ${isCartOpen?'cart-open':''} ${isSignupOpen?'signup-open':''} ${isLinksOpen?'links-open':''}`}>
             <section className="link-container">
-            
                 <NavLink to={'/'} onClick={()=>onCloseScreen(true)}>Home</NavLink>
                 <NavLink to={'/toy'} onClick={()=>onCloseScreen(true)}>Shop</NavLink>
                 <NavLink to={'/review'} onClick={()=>onCloseScreen(true)}>Reviews</NavLink>
@@ -50,27 +57,26 @@ export function AppHeader({onToggleScreen,onCloseScreen}) {
             </section>
 
             {!user && <button className="btn light" onClick={() => {
-                onToggleSignupModal(true)
+                setIsSignupOpen(prev=>!prev)
             }}>Login/Signup</button>}
 
 
             {user && <section className="user-info">
                 {user.isAdmin && <span>Admin</span>}
                 <span>{user.fullname}</span>
-                <a href="#" onClick={(ev) => {
-                    ev.preventDefault()
-                    dispatch({ type: SET_CART_IS_SHOWN, isCartShown: !isCartShown })
-                }}>
+
+                <a href="#" onClick={()=>setIsCartOpen(prev=>!prev)}>
                     🛒
                 </a>
+
                 <button className="btn light" onClick={onLogout}>Logout </button>
             </section>}
             
 
             {isSignupOpen && <Signup onCloseSignup={onCloseSignup} />}
-            <ShoppingCart isCartShown={isCartShown} shoppingCart={shoppingCart} />
+            <ShoppingCart shoppingCart={shoppingCart} />
             <UserMsg />
-            <button className="menu-btn" onClick={()=>onToggleScreen(true)}><span></span></button>
+            <button className="menu-btn" onClick={()=>setIsLinksOpen(prev=>!prev)}><span></span></button>
         </section>
     )
 }
