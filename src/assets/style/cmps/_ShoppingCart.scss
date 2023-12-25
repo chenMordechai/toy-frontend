@@ -1,13 +1,13 @@
 .cart {
     position: fixed;
     left: 0px;
-    top: 70px;
+    top: 0px;
 
     @include flex(column, center, center, $pad1);
     color: $clr6;
     background-color: inherit;
-    width: 250px;
-    height: max-content;
+    width: 221px;
+    height: 100vh;
     padding: $pad1;
 
     translate: -250px 0px;
@@ -15,6 +15,11 @@
 
     .app-header.cart-open & {
         translate: 0% 0%;
+    }
+
+    @include for-mobile-layout {
+        top: 70px;
+        width: 250px;
     }
 
     // // ul {

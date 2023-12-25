@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { userService } from '../services/user.service.js';
 
 
-export function LoginSignup({ onCloseSignup }) {
+export function LoginSignup({ setIsSignupOpen }) {
 
     const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
     const [isSignupState, setIsSignupState] = useState(false)
@@ -17,7 +17,7 @@ export function LoginSignup({ onCloseSignup }) {
     }
 
     async function onSubmit(ev) {
-        onCloseSignup()
+        setIsSignupOpen(false)
         ev.preventDefault()
 
         if (isSignupState) {

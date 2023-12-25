@@ -5,9 +5,8 @@ import { userService } from '../services/user.service.js'
 import { checkout } from '../store/actions/user.actions.js'
 import {REMOVE_TOY_FROM_CART , CLEAR_CART } from '../store/reducers/toy.reducer.js'
 
-export function ShoppingCart({ shoppingCart }) {
+export function ShoppingCart({ shoppingCart,setIsCartOpen,user }) {
     const dispatch = useDispatch()
-    const user = useSelector(storeState => storeState.userModule.loggedinUser)
 
     function removeFromCart(toyId) {
         dispatch({ type: REMOVE_TOY_FROM_CART, toyId })
@@ -18,11 +17,11 @@ export function ShoppingCart({ shoppingCart }) {
     }
 
     function onCheckout() {
+        setIsCartOpen(false)
         const amount = getCartTotal()
         dispatch({ type: CLEAR_CART })
         showSuccessMsg(`Charged you: $ ${amount.toLocaleString()}`)
     }
-
    
     const total = getCartTotal()
     return (
@@ -34,7 +33,7 @@ export function ShoppingCart({ shoppingCart }) {
                         <button className="btn" onClick={() => {
                             removeFromCart(toy._id)
                         }}>x</button>
-                        {toy.name} | ${toy.price}
+                        {toy.name} - ${toy.price}
                     </li>)
                 }
             </ul>

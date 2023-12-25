@@ -5,13 +5,13 @@ export function NavSide() {
 
     return (
         <section className="nav-side">
-            <div className='blue'>
+            {/* <div className='blue'>
                 <FontAwesomeIcon icon={faCartShopping} />
-            </div>
+            </div> */}
             <div className='blue'>
                 <FontAwesomeIcon icon={faBell} />
             </div>
-            <div>
+            <div className='blue'>
                 <FontAwesomeIcon icon={faClipboard} />
             </div>
             <div>

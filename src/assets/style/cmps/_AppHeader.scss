@@ -8,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
+  font-size: 1.2em;
 
   .link-container {
     @include flex(row, center, space-between, $pad1);

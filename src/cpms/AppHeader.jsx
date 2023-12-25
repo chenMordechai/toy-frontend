@@ -1,4 +1,4 @@
-import { useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { useState,useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { UserMsg } from './UserMsg.jsx'
@@ -7,13 +7,16 @@ import { logout } from '../store/actions/user.actions.js'
 import { Signup } from './Signup.jsx'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 import { SET_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 export function AppHeader({isScreenOpen,onOpenScreen,onCloseScreen}) {
+    const user = useSelector(storeState => storeState.userModule.loggedinUser)
     const [isSignupOpen, setIsSignupOpen] = useState(false)
     const [isLinksOpen, setIsLinksOpen] = useState(false)
     const [isCartOpen, setIsCartOpen] = useState(false)
-    
-    const user = useSelector(storeState => storeState.userModule.loggedinUser)
+
+    const dispatch = useDispatch()
     const shoppingCart = useSelector(storeState => storeState.toyModule.shoppingCart)
    
     useEffect(()=>{
@@ -64,11 +67,9 @@ export function AppHeader({isScreenOpen,onOpenScreen,onCloseScreen}) {
             {user && <section className="user-info">
                 {user.isAdmin && <span>Admin</span>}
                 <span>{user.fullname}</span>
-
                 <a href="#" onClick={()=>setIsCartOpen(prev=>!prev)}>
-                    🛒
+                <FontAwesomeIcon icon={faCartShopping} />
                 </a>
-
                 <button className="btn light" onClick={onLogout}>Logout </button>
             </section>}
             
